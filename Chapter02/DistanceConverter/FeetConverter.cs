@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DistanceConverter {
-    internal class FeetConverter {
+    public static  class FeetConverter {
    
         //メートルからフィートを求める
-        public double MeterToFeet(int meter) {
+        public　static  double MeterToFeet(double meter) {
             return meter / 0.3048;
         }
         //フィートからメートルを求める
-        public double FeetToMeter(int feet) {
+        public static double FeetToMeter(double feet) {
             return feet * 0.3048;
         }
     }
