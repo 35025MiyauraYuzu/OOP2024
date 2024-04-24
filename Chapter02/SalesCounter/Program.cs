@@ -9,32 +9,12 @@ namespace SalesCounter {
     internal class Program {
         static void Main(string[] args) {
 
-            SalesCounter sales = new SalesCounter(RedSales("data/sales.csv"));
+            SalesCounter sales = new SalesCounter("data/sales.csv");
             Dictionary<string, int> amountPerStore = sales.GetPerStoreSales();
-            foreach(KeyValuePair<string,int> obj in amountPerStore) {
-                Console.WriteLine("{0}{1}",obj.Key,obj.Value);
+            foreach (KeyValuePair<string, int> obj in amountPerStore) {
+                Console.WriteLine("{0}{1}", obj.Key, obj.Value);
             }
         }
-
-        //売上データを読み込み、saleオブジェクトのリストを返す
-        static List<Sales> RedSales(string filpath) {
-            List<Sales> sales = new List<Sales>();
-            string[] lines = File.ReadAllLines(filpath);
-            foreach (string line in lines) {
-                string[] items = line.Split(',');
-                Sales sale = new Sales {
-                    ShopName = items[0],
-                    ProductCategory = items[1],
-                    Amount = int.Parse(items[2]),
-                };
-                sales.Add(sale);
-            }
-            return sales;
-        }
-
-
-
-
 
     }
 }
