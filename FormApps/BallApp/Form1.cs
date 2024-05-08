@@ -1,41 +1,39 @@
 namespace BallApp {
     public partial class Form1 : Form {
-
-        private double posX; //X座標
-        private double posY; //Y座標
-        private double moveX;//移動量(x方向)
-        private double moveY;//移動量(y方向)
-
-
-
+        SoccerBall soccerBall;
+        PictureBox pb;
         //コンストラクタ
         public Form1() {
             InitializeComponent();
-            moveX = moveY = 7;
         }
-
 
         //フォームが最初にロードされるとき一度だけ実行される
         private void Form1_Load(object sender, EventArgs e) {
             this.BackColor = Color.Aqua;
-            timer1.Start();
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
+            soccerBall.Move();
+            pb.Location = new Point((int)(soccerBall.PosX), (int)(soccerBall.PosY));
 
-            if (pbBall.Location.X >= 700||pbBall.Location.X <0) {
-                moveX = -moveX;
-            }
+        }
 
-            if (pbBall.Location.Y >= 500 || pbBall.Location.Y < 0) {
-                moveY = -moveY;
-            }
-            posX += moveX;
-            posY += moveY;
+        private void Form1_MouseClick(object sender, MouseEventArgs e) {
 
-            pbBall.Location = new Point((int)posX, (int)posY);
+            pb = new PictureBox();//画像を表示するコントロール
+            pb.Size = new Size(50, 50);
+           /* Point mp = Control.MousePosition;
+            Point pt= this.PointToClient(mp);
+            int x = pt.X;
+            int y = pt.Y;*/
+            soccerBall = new SoccerBall(e.X,e.Y);
+
+            pb.Image = soccerBall.Image;
+            pb.Location = new Point((int)(soccerBall.PosX), (int)(soccerBall.PosY));
+            pb.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb.Parent = this;
+
+            timer1.Start();
         }
     }
 }

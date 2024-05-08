@@ -24,20 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             components = new System.ComponentModel.Container();
-            pbBall = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
-            ((System.ComponentModel.ISupportInitialize)pbBall).BeginInit();
             SuspendLayout();
-            // 
-            // pbBall
-            // 
-            pbBall.Image = Properties.Resources.soccer_ball;
-            pbBall.Location = new Point(59, 37);
-            pbBall.Name = "pbBall";
-            pbBall.Size = new Size(100, 100);
-            pbBall.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbBall.TabIndex = 0;
-            pbBall.TabStop = false;
             // 
             // timer1
             // 
@@ -50,17 +38,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 192, 192);
             ClientSize = new Size(784, 561);
-            Controls.Add(pbBall);
             Name = "Form1";
             Text = "BallApp";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pbBall).EndInit();
+            MouseClick += Form1_MouseClick;
             ResumeLayout(false);
         }
 
         #endregion
-
-        private PictureBox pbBall;
         private System.Windows.Forms.Timer timer1;
     }
 }
