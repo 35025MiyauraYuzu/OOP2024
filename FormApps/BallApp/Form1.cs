@@ -1,9 +1,8 @@
 namespace BallApp {
     public partial class Form1 : Form {
 
-        PictureBox pb;
-
-        Obj obj;
+        private List<Obj> balls = new List<Obj>();//インスタンス格納用
+        private List<PictureBox> pbs = new List<PictureBox>(); //表示用
 
         //コンストラクタ
         public Form1() {
@@ -16,28 +15,36 @@ namespace BallApp {
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            obj.Move();
-            pb.Location = new Point((int)(obj.PosX), (int)(obj.PosY));
+     
+            for (int i = 0; i < balls.Count; i++) {
+                balls[i].Move();
+                pbs[i].Location= new Point((int)(balls[i].PosX), (int)(balls[i].PosY));
+
+
+            }
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e) {
 
-            pb = new PictureBox();//画像を表示するコントロール
-
+            PictureBox pb = new PictureBox();//画像を表示するコントロール
+            Obj ball = null;
 
             if (e.Button == MouseButtons.Left) {
-                obj = new SoccerBall(e.X, e.Y);
+                ball = new SoccerBall(e.X, e.Y);
                 pb.Size = new Size(50, 50);
 
             } else if (e.Button == MouseButtons.Right) {
-                obj = new TennisBall(e.X, e.Y);
-                pb.Size = new Size(30, 30);
+                ball = new TennisBall(e.X, e.Y);
+                pb.Size = new Size(40, 40);
             }
-            pb.Image = obj.Image;
-            pb.Location = new Point((int)(obj.PosX), (int)(obj.PosY));
+            pb.Image = ball.Image;
+            pb.Location = new Point((int)(ball.PosX), (int)(ball.PosY));
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
             pb.Parent = this;
             timer1.Start();
+
+            balls.Add(ball);
+            pbs.Add(pb);
         }
     }
 }
