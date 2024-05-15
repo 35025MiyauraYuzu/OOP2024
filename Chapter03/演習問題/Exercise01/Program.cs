@@ -27,20 +27,17 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_1(List<int> numbers) {
-            var exercise = numbers.FindAll(s => s % 8 == 0 || s % 9 == 0);
-            foreach(var s in exercise)
-                Console.WriteLine(s);
+            var exercise = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
+                Console.WriteLine(exercise);
            
         }
 
         private static void Exercise1_2(List<int> numbers) {
-            var exercise = numbers.Select(s => s / 2.0);
-            foreach (var s in exercise)
-                Console.WriteLine(s);
-
+        
         }
 
         private static void Exercise1_3(List<int> numbers) {
+
 
         }
 
