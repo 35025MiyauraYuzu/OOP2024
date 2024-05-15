@@ -41,12 +41,12 @@ namespace Exercise01 {
             IEnumerable<int> exercise = numbers.Where(s => s >= 50);
             foreach (int s in exercise)
                 Console.WriteLine(s);
-                
-            
         }
 
         private static void Exercise1_4(List<int> numbers) {
-
+            IEnumerable<int> exercise = numbers.Select(s => s * 2);
+            foreach (int s in exercise)
+                Console.WriteLine(s);
         }
     }
 }
