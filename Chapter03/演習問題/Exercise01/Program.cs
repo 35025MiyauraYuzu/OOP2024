@@ -38,15 +38,19 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_3(List<int> numbers) {
-            IEnumerable<int> exercise = numbers.Where(s => s >= 50);
-            foreach (int s in exercise)
-                Console.WriteLine(s);
+            //IEnumerable<int> exercise = numbers.Where(s => s >= 50);
+            //foreach (int s in exercise)
+            //  Console.WriteLine(s);
+
+            numbers.Where(s => 50 <= s).ToList().ForEach(s => Console.WriteLine(s));
         }
 
         private static void Exercise1_4(List<int> numbers) {
-            IEnumerable<int> exercise = numbers.Select(s => s * 2);
-            foreach (int s in exercise)
-                Console.WriteLine(s);
+            //IEnumerable<int> exercise = numbers.Select(s => s * 2);
+            //foreach (int s in exercise)
+            //   Console.WriteLine(s);
+
+            numbers.Select(s => s * 2).ToList().ForEach(s => Console.WriteLine(s));
         }
     }
 }
