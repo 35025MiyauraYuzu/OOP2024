@@ -34,6 +34,9 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_2(List<int> numbers) {
+            var exercise = numbers.Select(s => s / 2.0);
+            foreach (var s in exercise)
+                Console.WriteLine(s);
 
         }
 
