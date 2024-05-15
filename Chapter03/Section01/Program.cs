@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,17 @@ namespace Section01 {
               "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
             };
 
-            IEnumerable<string> query = names.Where(s => s.Contains(' '))
-                                        .Select(s => s.ToUpper());
+            var query = names.Where(s => s.Length <= 5).ToArray();
+            foreach (var item in query) {
+                Console.WriteLine(item);
+            }
 
-            foreach (string s in query)
-                Console.WriteLine(s);
+            Console.WriteLine("-------");
+
+            names[0] = "Osaka";
+            foreach(var Item in query) {
+                Console.WriteLine(Item);
+            }
 
         }
     }
