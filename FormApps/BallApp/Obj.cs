@@ -13,14 +13,15 @@ namespace BallApp {
         public double MoveY { get; set; }
 
         //コンストラクタ
-        public Obj(double posX, double posY, string path) {
+        public Obj(double posX, double posY, string path)
+        {
             PosX = posX;
             PosY = posY;
-            Image = Image.FromFile(path);
+            Image = Image.FromFile(path);            
         }
 
-        //移動メソッド(抽象メソッド）
-        public abstract bool Move();
-
+        //移動メソッド（抽象メソッド）
+        public abstract bool Move(PictureBox pbBar, PictureBox pbBall);
+        public abstract bool Move(Keys direction);
     }
 }
