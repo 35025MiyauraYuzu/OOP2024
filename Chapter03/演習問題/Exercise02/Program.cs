@@ -51,14 +51,15 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_3(List<string> names) {
-            var where = names.Where(s => s.Contains('o'));
-            foreach (var item in where) {
+            var selected = names.Where(s => s.Contains('o')).ToArray();
+            foreach (var item in selected) {
                 Console.WriteLine(item);
             }
         }
 
         private static void Exercise2_4(List<string> names) {
-
+            var strings = names.Where(s => s.StartsWith("B")).ToArray().Select(s => new { s.Length, s });
+            foreach (var obj in strings) Console.WriteLine(obj.s+","+obj.Length);
         }
     }
 }
