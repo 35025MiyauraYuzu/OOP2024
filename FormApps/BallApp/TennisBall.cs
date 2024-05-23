@@ -14,8 +14,8 @@ namespace BallApp {
         public TennisBall(double xp, double yp)
             : base(xp, yp, @"Picture\tennis_ball.png") {
 
-            MoveX = random.Next(-25, 25); //移動量設定
-            MoveY = random.Next(-25, 25); ;
+            MoveX = random.Next(-15, 15); //移動量設定
+            MoveY = random.Next(-15, 15); ;
 
             Count++;
         }

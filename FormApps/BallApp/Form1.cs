@@ -40,9 +40,11 @@ namespace BallApp {
                 int ret = balls[i].Move(pbBar, pbs[i]);
                 if (ret == 1) {
                     balls.RemoveAt(i);
-                
+
                     pbs[i].Location = new Point(5000, 5000);
                     pbs.RemoveAt(i);
+                    this.scoreCount -= 10;
+                    score.Text = "スコア:" + this.scoreCount;
 
                 } else if (ret == 2) {
                     //バーに当たった

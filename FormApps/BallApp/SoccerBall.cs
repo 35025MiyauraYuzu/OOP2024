@@ -14,8 +14,17 @@ namespace BallApp {
         public SoccerBall(double xp, double yp)
             : base(xp, yp, @"Picture\soccer_ball.png") {
 
-            MoveX = random.Next(-25, 25); //移動量設定
-            MoveY = random.Next(-25, 25);
+#if DEBUG
+
+            MoveX = 5;
+            MoveY = 5;
+#else
+            MoveX = random.Next(-20, 20); //移動量設定
+            MoveY = random.Next(-20, 20);
+
+
+#endif
+
 
             Count++;
         }
