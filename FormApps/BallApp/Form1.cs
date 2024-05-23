@@ -37,10 +37,20 @@ namespace BallApp {
         private void timer1_Tick(object sender, EventArgs e) {
 
             for (int i = 0; i < balls.Count; i++) {
-                if (!balls[i].Move(pbBar, pbs[i])) {
-                    //落下したボールインスタンスを削除する 
+                int ret = balls[i].Move(pbBar, pbs[i]);
+                if (ret == 1) {
+                    balls.RemoveAt(i);
+                
+                    pbs[i].Location = new Point(5000, 5000);
+                    pbs.RemoveAt(i);
+
+                } else if (ret == 2) {
+                    //バーに当たった
+                    score.Text = "スコア:" + ++this.scoreCount;
+                    pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
 
                 } else {
+                    //移動正常
                     pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
                 }
             }

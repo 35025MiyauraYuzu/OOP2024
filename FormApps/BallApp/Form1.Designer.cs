@@ -37,7 +37,7 @@
             // 
             score.AutoSize = true;
             score.Font = new Font("Yu Gothic UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            score.Location = new Point(528, 9);
+            score.Location = new Point(554, 138);
             score.Name = "score";
             score.Size = new Size(105, 32);
             score.TabIndex = 0;
