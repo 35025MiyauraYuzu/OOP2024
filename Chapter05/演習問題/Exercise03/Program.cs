@@ -67,15 +67,23 @@ namespace Exercise03 {
         private static void Exercise3_5(string text) {
 
             var array = text.Split(' ').ToArray();
-
-            var sb = new StringBuilder();
-            foreach (var item in array) {
-                sb.Append(item);
-                sb.Append(' ');
-
+            if (array.Length > 0) {
+                var sb = new StringBuilder(array[0]);
+                foreach (var item in array.Skip(1)) {
+                    sb.Append(' ');
+                    sb.Append(item);
+                }
+                Console.WriteLine(sb);
             }
-            Console.WriteLine(sb);
         }
 
+
+
+        private static void Exercise3_6(string text) {
+            var array = text.Split(new[] { ' ', ',', '-', '_' }).ToArray();
+            foreach (var item in array) {
+                Console.WriteLine(item);
+            }
+        }
     }
 }
