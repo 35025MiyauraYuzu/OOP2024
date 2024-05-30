@@ -26,13 +26,15 @@ namespace Exercise03 {
 
         private static void Exercise3_1(string text) {
 
-            int count = 0;
-            foreach (var item in text) {
-                if (item == ' ') {
-                    count++;
-                } 
-            }
-            Console.WriteLine(count);
+            //     int count = 0;
+            //     foreach (var item in text) {
+            //         if (item == ' ') {
+            //             count++;
+            //         }
+            //     }
+            //    Console.WriteLine(count);
+            var count = text.Count(c => c == ' ');
+            Console.WriteLine("空白数:{0}", count);
         }
 
         private static void Exercise3_2(string text) {
@@ -42,17 +44,21 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            int count = 0;
-            foreach (var item in text) {
-                if (item == ' ') {
-                    count++;
-                }
-            }
-            Console.WriteLine(count);
+            
+            // foreach (var item in text) {
+            //      if (item == ' ') {
+            //        count++;
+            //     }
+            //  }
+            //  Console.WriteLine(count);
+            int count =text.Split(' ').Length;
+            Console.WriteLine("単語数:{0}", count);
 
         }
 
+
         private static void Exercise3_4(string text) {
+
 
         }
 
