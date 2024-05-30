@@ -10,6 +10,12 @@ namespace Exercise02 {
             var math =Console.ReadLine();
             int.TryParse(math, out var n);
             Console.WriteLine(n.ToString("#,0"));
+
+            if(int.TryParse(math, out n)) {
+                Console.WriteLine("{0:#,#}", n);
+            } else {
+                Console.WriteLine("数字文字列がありません。");
+            }
         }
     }
 }
