@@ -38,7 +38,10 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_3(int[] numbers) {
-
+            var str = numbers.Select(x => x.ToString()).ToArray();
+            foreach (var item in str) {
+                Console.WriteLine(item);
+            }
         }
 
         private static void Exercise1_4(int[] numbers) {
