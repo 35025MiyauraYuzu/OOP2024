@@ -46,29 +46,49 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            var book = books.FirstOrDefault(s => s.Title == "ワンダフル・C#ライフ");
-            Console.WriteLine("価格:{0}　ページ数:{1}", book.Price, book.Pages);
+            var book = books.Where(s => s.Title == "ワンダフル・C#ライフ");
+            foreach (var item in book) {
+                Console.WriteLine("{0}円{1}ページ", item.Price, item.Pages);
+            }
         }
 
         private static void Exercise2_2(List<Book> books) {
             var count = books.Count(s => s.Title.Contains("C#"));
-            Console.WriteLine("C#が含まれている書籍の数"+count);
+            Console.WriteLine("C#が含まれている書籍の数" + count);
         }
 
         private static void Exercise2_3(List<Book> books) {
+            var averaeg = books.Where(b => b.Title.Contains("C#")).Average(b => b.Pages);
+            Console.WriteLine(averaeg);
 
         }
 
         private static void Exercise2_4(List<Book> books) {
+            var pri = books.FirstOrDefault(n => n.Price >= 4000);
+            if (pri != null) {
+                Console.WriteLine(pri.Title);
+            }
+
         }
 
         private static void Exercise2_5(List<Book> books) {
+            var page = books.Where(b => b.Price < 4000).Max(b => b.Pages);
+            Console.WriteLine(page);
         }
 
         private static void Exercise2_6(List<Book> books) {
+            var page = books.Where(b => b.Pages >= 400).OrderByDescending(x => x.Price).ToArray();
+            foreach (var item in page) {
+                Console.WriteLine("{0}{1}円", item.Title, item.Price);
+            }
         }
 
         private static void Exercise2_7(List<Book> books) {
+            var ti = books.Where(s => s.Pages <= 500 && s.Title.Contains("C#")).ToArray();
+            foreach (var item in ti) {
+                Console.WriteLine(item.Title);
+            }
+
         }
     }
 }
