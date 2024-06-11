@@ -77,14 +77,14 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_6(List<Book> books) {
-            var page = books.Where(b => b.Pages >= 400).OrderByDescending(x => x.Price).ToArray();
+            var page = books.Where(b => b.Pages >= 400).OrderByDescending(x => x.Price);
             foreach (var item in page) {
                 Console.WriteLine("{0}{1}円", item.Title, item.Price);
             }
         }
 
         private static void Exercise2_7(List<Book> books) {
-            var ti = books.Where(s => s.Pages <= 500 && s.Title.Contains("C#")).ToArray();
+            var ti = books.Where(s => s.Pages <= 500 && s.Title.Contains("C#"));
             foreach (var item in ti) {
                 Console.WriteLine(item.Title);
             }
