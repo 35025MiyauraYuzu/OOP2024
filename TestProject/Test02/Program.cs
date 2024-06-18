@@ -83,10 +83,10 @@ namespace Test02 {
         //　　　　出力結果【91 87 53 35 31 17】
         private static void Exercise03(List<int> numbers) {
 
-            var kisuu = numbers.OrderBy(x => x).ToList().Where(x => x % 2 == 1);
+            var kisuu = numbers.OrderBy(x => x).Where(x => x % 2 == 1);
 
             foreach (var item in kisuu) {
-                Console.WriteLine(kisuu);
+                Console.WriteLine(item);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Test02 {
 
             var min = numbers.Where(x => x >= 10 && x <= 50).ToList();
             foreach (var item in min) {
-                Console.WriteLine(min);
+                Console.WriteLine(item);
             }
 
 
@@ -127,7 +127,7 @@ namespace Test02 {
         private static void Exercise07(List<Person> persons) {
             var yase = persons.Where(x => x.Weight <= 70).ToList();
             foreach (var item in yase) {
-                Console.WriteLine("{0}{1}", item.Name, item.Weight);
+                Console.WriteLine("{0} {1}kg", item.Name, item.Weight);
             }
         }
 
