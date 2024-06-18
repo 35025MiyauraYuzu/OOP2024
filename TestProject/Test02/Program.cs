@@ -86,7 +86,7 @@ namespace Test02 {
             var kisuu = numbers.OrderBy(x => x).Where(x => x % 2 == 1);
 
             foreach (var item in kisuu) {
-                Console.WriteLine(item);
+                Console.Write(item+" ");
             }
         }
 
@@ -96,7 +96,7 @@ namespace Test02 {
 
             var min = numbers.Where(x => x >= 10 && x <= 50).ToList();
             foreach (var item in min) {
-                Console.WriteLine(item);
+                Console.Write(item+" ");
             }
 
 
