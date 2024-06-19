@@ -37,9 +37,8 @@ namespace Test01 {
                 } else {
                     dict[student.Name] = student.Score;
                 }
-                return dict;
-
             }
+            return dict;
         }
     }
 }

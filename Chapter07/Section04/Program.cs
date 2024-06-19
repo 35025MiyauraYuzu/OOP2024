@@ -41,7 +41,19 @@ namespace Section04 {
             Console.WriteLine();
 
             //7.2.3
-            var 
+            int count = abbrs.count;
+            Console.WriteLine(count);
+
+
+            if (abbrs.Remove("O")) {
+
+                Console.WriteLine("削除できました");
+            } else {
+                Console.WriteLine("削除できません");
+            }
+
+
+
 
         }
     }
