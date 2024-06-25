@@ -41,18 +41,28 @@ namespace Section04 {
             Console.WriteLine();
 
             //7.2.3
-            int count = abbrs.count;
-            Console.WriteLine(count);
+            Console.WriteLine(abbrs.count);
 
 
-            if (abbrs.Remove("O")) {
-
+            if (abbrs.Remove("ODA")) {
                 Console.WriteLine("削除できました");
+                Console.WriteLine(abbrs.count);
             } else {
                 Console.WriteLine("削除できません");
             }
 
+            if (abbrs.Remove("ODA")) {
+                Console.WriteLine("削除できました");
+                Console.WriteLine(abbrs.count);
+            } else {
+                Console.WriteLine("削除できません");
+            }
 
+            //7.2.4
+            //IEnumerableを実装したので,LINQが使える
+            foreach (var addr in abbrs.Where(x => x.Key.Length == 3)) {
+                Console.WriteLine("{0}={1}", addr.Key, addr.Value);
+            }
 
 
         }
