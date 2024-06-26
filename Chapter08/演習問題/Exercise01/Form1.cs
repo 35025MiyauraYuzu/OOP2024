@@ -44,5 +44,31 @@ namespace Exercise01 {
             return nextwek.AddDays(day);
 
         }
+
+        private void btex8_3_Click(object sender, EventArgs e) {
+            var tw = new TimeWatch();
+            tw.Start();
+            Thread.Sleep(1000);
+            TimeSpan duration = tw.Stop();
+            var str = string.Format("èàóùéûä‘ÇÕ{0}É~ÉäïbÇ≈ÇµÇΩ", duration.TotalMilliseconds);
+            tbDisp.Text += str + "\r\n";
+
+        }
+    }
+    class TimeWatch {
+        private DateTime _Time;
+
+        public void Start() {
+            _Time = DateTime.Now;
+
+        }
+
+        public TimeSpan Stop() {
+            var stop = DateTime.Now;
+
+            return stop - _Time;
+
+        }
+
     }
 }
