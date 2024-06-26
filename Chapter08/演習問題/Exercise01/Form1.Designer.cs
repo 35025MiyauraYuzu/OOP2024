@@ -44,7 +44,7 @@
             tbDisp.Location = new Point(78, 296);
             tbDisp.Multiline = true;
             tbDisp.Name = "tbDisp";
-            tbDisp.Size = new Size(199, 142);
+            tbDisp.Size = new Size(692, 142);
             tbDisp.TabIndex = 1;
             // 
             // BtEx82

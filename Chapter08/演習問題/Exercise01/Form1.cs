@@ -7,7 +7,7 @@ namespace Exercise01 {
         }
 
         private void Btex81_Click(object sender, EventArgs e) {
-            var dete =DateTime.Now;
+            var dete = DateTime.Now;
             tbDisp.Text = DateTime.Now.ToString() + "\r\n";
             tbDisp.Text += DateTime.Now.ToString("yyyy年MM月dd日 hh時mm分ss秒") + "\r\n";
             var culture = new CultureInfo("ja-jp");
@@ -17,7 +17,32 @@ namespace Exercise01 {
         }
 
         private void BtEx82_Click(object sender, EventArgs e) {
-            
+
+            var dateTime = DateTime.Today;
+            foreach (var dayofweek in Enum.GetValues(typeof(DayOfWeek))) {
+
+                var str1 = string.Format("{0:yy/MM/dd}の次週の{1}:", dateTime, (DayOfWeek)dayofweek);
+                ;
+                var str2 = string.Format("{0:yy/MM/dd}:", NextWeek(dateTime, (DayOfWeek)dayofweek));
+
+                tbDisp.Text += str1 + str2 + "\r\n";
+            }
+
+
+        }
+
+        //第一引数で指定した日付の翌週のインスタンスを返却。
+        public static DateTime NextWeek(DateTime date, DayOfWeek dayOfWeek) {
+            /* var days = (int)dayOfWeek - (int)(date.DayOfWeek);
+
+             days += 7;
+
+             return date.AddDays(days);*/
+
+            var nextwek = date.AddDays(7);
+            var day = (int)dayOfWeek - (int)date.DayOfWeek;
+            return nextwek.AddDays(day);
+
         }
     }
 }
