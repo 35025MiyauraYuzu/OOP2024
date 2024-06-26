@@ -67,7 +67,7 @@ namespace Exercise01 {
             var stop = DateTime.Now;
 
             return stop - _Time;
-
+            //return DateTime.Now - _Time; 
         }
 
     }
