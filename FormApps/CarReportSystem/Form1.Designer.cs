@@ -221,6 +221,7 @@
             tbReport.Name = "tbReport";
             tbReport.Size = new Size(431, 151);
             tbReport.TabIndex = 5;
+            tbReport.TextChanged += tbReport_TextChanged;
             // 
             // label6
             // 
@@ -270,6 +271,7 @@
             btAddreport.TabIndex = 6;
             btAddreport.Text = "追加";
             btAddreport.UseVisualStyleBackColor = true;
+            btAddreport.Click += btAddreport_Click;
             // 
             // btDeleteReport
             // 
@@ -302,6 +304,7 @@
             dgvCarReport.ReadOnly = true;
             dgvCarReport.Size = new Size(885, 194);
             dgvCarReport.TabIndex = 8;
+            dgvCarReport.CellContentClick += dgvCarReport_CellContentClick;
             // 
             // btReportOpen
             // 
