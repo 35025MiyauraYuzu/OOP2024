@@ -27,8 +27,39 @@ namespace CarReportSystem {
         private void btAddreport_Click(object sender, EventArgs e) {
             CarReport carReport = new CarReport {
                 Date = dtpDate.Value,
+                Auter = cbAuther.Text,
+                Maker = GetRedioButtonMaker(),
+                CarName = cbCarname.Text,
+                Report = tbReport.Text,
+                Picture = pbPicture.Image,
+
             };
             listCarReports.Add(carReport);
+
+        }
+        //選択されているメーカー名を列挙型で返す
+        private CarReport.MakerGroup GetRedioButtonMaker() {
+            if (rbToyota.Checked) {
+                return CarReport.MakerGroup.トヨタ;
+            }
+            if (rbNissan.Checked) {
+                return CarReport.MakerGroup.日産;
+            }
+            if (rbHonda.Checked) {
+                return CarReport.MakerGroup.ホンダ;
+            }
+            if (rbSubaru.Checked) {
+                return CarReport.MakerGroup.スバル;
+            }
+            if (rbOther.Checked) {
+                return CarReport.MakerGroup.輸入車;
+            } else
+
+                return CarReport.MakerGroup.その他;
+
+        }
+
+        private void rbHonda_CheckedChanged(object sender, EventArgs e) {
 
         }
     }

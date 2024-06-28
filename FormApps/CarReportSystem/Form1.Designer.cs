@@ -100,7 +100,7 @@
             cbAuther.FormattingEnabled = true;
             cbAuther.Location = new Point(124, 80);
             cbAuther.Name = "cbAuther";
-            cbAuther.Size = new Size(241, 33);
+            cbAuther.Size = new Size(294, 33);
             cbAuther.TabIndex = 2;
             // 
             // label4
@@ -191,6 +191,7 @@
             rbHonda.TabStop = true;
             rbHonda.Text = "ホンダ";
             rbHonda.UseVisualStyleBackColor = true;
+            rbHonda.CheckedChanged += rbHonda_CheckedChanged;
             // 
             // rbNissan
             // 
@@ -255,7 +256,7 @@
             // 
             // pbPicture
             // 
-            pbPicture.BackColor = Color.FromArgb(192, 255, 255);
+            pbPicture.BackColor = Color.FromArgb(255, 224, 192);
             pbPicture.Location = new Point(635, 80);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(356, 237);
