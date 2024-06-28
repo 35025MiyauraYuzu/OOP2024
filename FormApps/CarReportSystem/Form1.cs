@@ -62,5 +62,19 @@ namespace CarReportSystem {
         private void rbHonda_CheckedChanged(object sender, EventArgs e) {
 
         }
+
+        private void pbPicture_Click(object sender, EventArgs e) {
+
+        }
+
+        private void btPickOpen_Click(object sender, EventArgs e) {
+            if (ofdPicFileOpen.ShowDialog() == DialogResult.OK) {
+                pbPicture.Image = Image.FromFile(ofdPicFileOpen.FileName);
+            }
+        }
+
+        private void btPickDelete_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
+        }
     }
 }

@@ -50,6 +50,7 @@
             btReportOpen = new Button();
             btReportSave = new Button();
             btPickDelete = new Button();
+            ofdPicFileOpen = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
@@ -253,6 +254,7 @@
             btPickOpen.TabIndex = 6;
             btPickOpen.Text = "開く…";
             btPickOpen.UseVisualStyleBackColor = true;
+            btPickOpen.Click += btPickOpen_Click;
             // 
             // pbPicture
             // 
@@ -260,8 +262,10 @@
             pbPicture.Location = new Point(635, 80);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(356, 237);
+            pbPicture.SizeMode = PictureBoxSizeMode.Zoom;
             pbPicture.TabIndex = 7;
             pbPicture.TabStop = false;
+            pbPicture.Click += pbPicture_Click;
             // 
             // btAddreport
             // 
@@ -301,8 +305,10 @@
             dgvCarReport.AllowUserToDeleteRows = false;
             dgvCarReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarReport.Location = new Point(123, 416);
+            dgvCarReport.MultiSelect = false;
             dgvCarReport.Name = "dgvCarReport";
             dgvCarReport.ReadOnly = true;
+            dgvCarReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCarReport.Size = new Size(885, 194);
             dgvCarReport.TabIndex = 8;
             dgvCarReport.CellContentClick += dgvCarReport_CellContentClick;
@@ -336,6 +342,11 @@
             btPickDelete.TabIndex = 6;
             btPickDelete.Text = "削除";
             btPickDelete.UseVisualStyleBackColor = true;
+            btPickDelete.Click += btPickDelete_Click;
+            // 
+            // ofdPicFileOpen
+            // 
+            ofdPicFileOpen.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -402,5 +413,6 @@
         private Button btReportOpen;
         private Button btReportSave;
         private Button btPickDelete;
+        private OpenFileDialog ofdPicFileOpen;
     }
 }
