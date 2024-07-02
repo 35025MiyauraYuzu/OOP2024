@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics.Metrics;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
@@ -93,6 +95,21 @@ namespace CarReportSystem {
             tbReport.Text = (string)dgvCarReport.CurrentRow.Cells["Report"].Value;
             pbPicture.Image = (Image)dgvCarReport.CurrentRow.Cells["Picture"].Value;
 
+        }
+
+        private void btDeleteReport_Click(object sender, EventArgs e) {
+            listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
+        }
+
+        private void btModifyReport_Click(object sender, EventArgs e) {
+            listCarReports(dgvCarReport){
+
+            }
+
+
+            
+
+            dgvCarReport.Refresh();//データグリッドビューの更新
         }
     }
 }
