@@ -81,16 +81,17 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            //dgvCarReport.Columns["Picture"].Visible = false;  //‰æ‘œ•\Ž¦‚µ‚È‚¢
+            dgvCarReport.Columns["Picture"].Visible = false;  //‰æ‘œ•\Ž¦‚µ‚È‚¢
         }
 
         private void dgvCarReport_Click(object sender, EventArgs e) {
+            if (dgvCarReport.CurrentRow == null) return;
             dtpDate.Value = (DateTime)dgvCarReport.CurrentRow.Cells["Date"].Value;
             cbAuthor.Text = (string)dgvCarReport.CurrentRow.Cells["Author"].Value;
             setRadioButtonMaker((CarReport.MakerGroup)dgvCarReport.CurrentRow.Cells["Maker"].Value);
             cbCarName.Text = (string)dgvCarReport.CurrentRow.Cells["CarName"].Value;
             tbReport.Text = (string)dgvCarReport.CurrentRow.Cells["Report"].Value;
-            pbPicture.Image = (Image)dgvCarReport.CurrentRow.Cells["picture"].Value;
+            pbPicture.Image = (Image)dgvCarReport.CurrentRow.Cells["Picture"].Value;
 
         }
     }
