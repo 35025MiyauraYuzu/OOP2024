@@ -15,7 +15,13 @@ namespace CarReportSystem {
             dgvCarReport.DataSource = listCarReports;
         }
 
+        //追加
         private void btAddReport_Click(object sender, EventArgs e) {
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                tslbMessage.Text = "記録者、または車名が未記入です";
+                return;
+            }
+
             CarReport carReport = new CarReport {
                 Date = dtpDate.Value,
                 Author = cbAuthor.Text,
@@ -23,22 +29,33 @@ namespace CarReportSystem {
                 CarName = cbCarName.Text,
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
+
             };
+
+
             listCarReports.Add(carReport);
+
+            setCbAuthor(cbAuthor.Text);
+
+
+
+
 
         }
         //記録者の履歴をコンボボックスに登録(重複なし)
         private void setCbAuthor(string author) {
-            if(cbAuthor.Text != author) {
+            if (cbAuthor.Items.Contains(author)) {
                 cbAuthor.Items.Add(author);
             }
-           
+
 
         }
 
         //車名の履歴をコンボボックスへ登録(重複なし)
         private void setCbCarName(string carName) {
-
+            if (cbCarName.Items.Contains(carName)) {
+                cbCarName.Items.Add(carName);
+            }
         }
 
 
@@ -112,12 +129,13 @@ namespace CarReportSystem {
         }
         //削除ボタン
         private void btDeleteReport_Click(object sender, EventArgs e) {
+
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
         }
 
         //修正ボタン
         private void btModifyReport_Click(object sender, EventArgs e) {
-
+            if (listCarReports.Count == 0) return;
 
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuthor.Text;
@@ -128,5 +146,13 @@ namespace CarReportSystem {
 
             dgvCarReport.Refresh();//データグリッドビューの更新
         }
+
+        private void cbAuthor_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+
+
+
     }
 }
