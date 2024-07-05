@@ -53,6 +53,8 @@
             ofdPicFileOpen = new OpenFileDialog();
             ssMessagearea = new StatusStrip();
             tslbMessage = new ToolStripStatusLabel();
+            sfdReportFileSave = new SaveFileDialog();
+            ofdReportFileOpen = new OpenFileDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
@@ -155,10 +157,12 @@
             // rbOther
             // 
             rbOther.AutoSize = true;
+            rbOther.Checked = true;
             rbOther.Location = new Point(307, 15);
             rbOther.Name = "rbOther";
             rbOther.Size = new Size(56, 19);
             rbOther.TabIndex = 0;
+            rbOther.TabStop = true;
             rbOther.Text = "その他";
             rbOther.UseVisualStyleBackColor = true;
             // 
@@ -328,6 +332,7 @@
             btReportSave.TabIndex = 5;
             btReportSave.Text = "保存...";
             btReportSave.UseVisualStyleBackColor = true;
+            btReportSave.Click += btReportSave_Click;
             // 
             // btReportOpen
             // 
@@ -338,6 +343,7 @@
             btReportOpen.TabIndex = 5;
             btReportOpen.Text = "開く...";
             btReportOpen.UseVisualStyleBackColor = true;
+            btReportOpen.Click += btReportOpen_Click;
             // 
             // ofdPicFileOpen
             // 
@@ -357,6 +363,10 @@
             tslbMessage.Name = "tslbMessage";
             tslbMessage.Size = new Size(118, 17);
             tslbMessage.Text = "toolStripStatusLabel1";
+            // 
+            // ofdReportFileOpen
+            // 
+            ofdReportFileOpen.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -385,7 +395,9 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "Form1";
+            SizeGripStyle = SizeGripStyle.Hide;
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
@@ -430,5 +442,7 @@
         private OpenFileDialog ofdPicFileOpen;
         private StatusStrip ssMessagearea;
         private ToolStripStatusLabel tslbMessage;
+        private SaveFileDialog sfdReportFileSave;
+        private OpenFileDialog ofdReportFileOpen;
     }
 }
