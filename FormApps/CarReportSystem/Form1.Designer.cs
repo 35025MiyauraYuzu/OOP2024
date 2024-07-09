@@ -51,14 +51,18 @@
             btReportSave = new Button();
             btReportOpen = new Button();
             ofdPicFileOpen = new OpenFileDialog();
-            ssMessagearea = new StatusStrip();
+            ssMessageArea = new StatusStrip();
             tslbMessage = new ToolStripStatusLabel();
-            sfdReportFileSave = new SaveFileDialog();
             ofdReportFileOpen = new OpenFileDialog();
+            sfdReportFileSave = new SaveFileDialog();
+            AllClear = new Button();
+            menuStrip1 = new MenuStrip();
+            ファイルFToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
-            ssMessagearea.SuspendLayout();
+            ssMessageArea.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -97,7 +101,6 @@
             cbAuthor.Name = "cbAuthor";
             cbAuthor.Size = new Size(302, 33);
             cbAuthor.TabIndex = 2;
-            cbAuthor.SelectedIndexChanged += cbAuthor_SelectedIndexChanged;
             cbAuthor.TextChanged += cbAuthor_TextChanged;
             // 
             // label3
@@ -236,27 +239,31 @@
             // 
             // btPicOpen
             // 
-            btPicOpen.Location = new Point(607, 29);
+            btPicOpen.BackColor = Color.FromArgb(255, 128, 0);
+            btPicOpen.DialogResult = DialogResult.No;
+            btPicOpen.FlatStyle = FlatStyle.System;
+            btPicOpen.Location = new Point(600, 26);
             btPicOpen.Name = "btPicOpen";
             btPicOpen.Size = new Size(75, 23);
             btPicOpen.TabIndex = 5;
             btPicOpen.Text = "開く...";
-            btPicOpen.UseVisualStyleBackColor = true;
+            btPicOpen.UseVisualStyleBackColor = false;
             btPicOpen.Click += btPicOpen_Click;
             // 
             // btPicDelete
             // 
-            btPicDelete.Location = new Point(688, 29);
+            btPicDelete.BackColor = Color.FromArgb(255, 192, 192);
+            btPicDelete.Location = new Point(688, 26);
             btPicDelete.Name = "btPicDelete";
             btPicDelete.Size = new Size(75, 23);
             btPicDelete.TabIndex = 5;
             btPicDelete.Text = "削除";
-            btPicDelete.UseVisualStyleBackColor = true;
+            btPicDelete.UseVisualStyleBackColor = false;
             btPicDelete.Click += btPicDelete_Click;
             // 
             // pbPicture
             // 
-            pbPicture.BackColor = Color.FromArgb(255, 224, 192);
+            pbPicture.BackColor = Color.FromArgb(192, 255, 255);
             pbPicture.Location = new Point(512, 57);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(251, 206);
@@ -288,13 +295,14 @@
             // 
             // btDeleteReport
             // 
+            btDeleteReport.BackColor = Color.FromArgb(255, 192, 192);
             btDeleteReport.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             btDeleteReport.Location = new Point(688, 274);
             btDeleteReport.Name = "btDeleteReport";
             btDeleteReport.Size = new Size(75, 37);
             btDeleteReport.TabIndex = 5;
             btDeleteReport.Text = "削除";
-            btDeleteReport.UseVisualStyleBackColor = true;
+            btDeleteReport.UseVisualStyleBackColor = false;
             btDeleteReport.Click += btDeleteReport_Click;
             // 
             // label7
@@ -312,6 +320,7 @@
             dgvCarReport.AllowUserToAddRows = false;
             dgvCarReport.AllowUserToDeleteRows = false;
             dgvCarReport.AllowUserToResizeRows = false;
+            dgvCarReport.BackgroundColor = Color.Silver;
             dgvCarReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarReport.Location = new Point(97, 329);
             dgvCarReport.MultiSelect = false;
@@ -326,7 +335,7 @@
             // btReportSave
             // 
             btReportSave.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btReportSave.Location = new Point(12, 442);
+            btReportSave.Location = new Point(12, 447);
             btReportSave.Name = "btReportSave";
             btReportSave.Size = new Size(75, 37);
             btReportSave.TabIndex = 5;
@@ -337,7 +346,7 @@
             // btReportOpen
             // 
             btReportOpen.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btReportOpen.Location = new Point(12, 395);
+            btReportOpen.Location = new Point(12, 404);
             btReportOpen.Name = "btReportOpen";
             btReportOpen.Size = new Size(75, 37);
             btReportOpen.TabIndex = 5;
@@ -349,31 +358,61 @@
             // 
             ofdPicFileOpen.FileName = "openFileDialog1";
             // 
-            // ssMessagearea
+            // ssMessageArea
             // 
-            ssMessagearea.Items.AddRange(new ToolStripItem[] { tslbMessage });
-            ssMessagearea.Location = new Point(0, 502);
-            ssMessagearea.Name = "ssMessagearea";
-            ssMessagearea.Size = new Size(812, 22);
-            ssMessagearea.TabIndex = 8;
-            ssMessagearea.Text = "statusStrip1";
+            ssMessageArea.Items.AddRange(new ToolStripItem[] { tslbMessage });
+            ssMessageArea.Location = new Point(0, 499);
+            ssMessageArea.Name = "ssMessageArea";
+            ssMessageArea.Size = new Size(780, 22);
+            ssMessageArea.SizingGrip = false;
+            ssMessageArea.TabIndex = 8;
+            ssMessageArea.Text = "statusStrip1";
             // 
             // tslbMessage
             // 
             tslbMessage.Name = "tslbMessage";
-            tslbMessage.Size = new Size(118, 17);
-            tslbMessage.Text = "toolStripStatusLabel1";
+            tslbMessage.Size = new Size(0, 17);
             // 
             // ofdReportFileOpen
             // 
             ofdReportFileOpen.FileName = "openFileDialog1";
             // 
+            // AllClear
+            // 
+            AllClear.BackColor = Color.FromArgb(255, 255, 192);
+            AllClear.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            AllClear.Location = new Point(12, 366);
+            AllClear.Name = "AllClear";
+            AllClear.Size = new Size(75, 32);
+            AllClear.TabIndex = 9;
+            AllClear.Text = "クリア";
+            AllClear.UseVisualStyleBackColor = false;
+            AllClear.Click += AllClear_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ファイルFToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(780, 24);
+            menuStrip1.TabIndex = 10;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // ファイルFToolStripMenuItem
+            // 
+            ファイルFToolStripMenuItem.Name = "ファイルFToolStripMenuItem";
+            ファイルFToolStripMenuItem.Size = new Size(67, 20);
+            ファイルFToolStripMenuItem.Text = "ファイル(&F)";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(812, 524);
-            Controls.Add(ssMessagearea);
+            BackColor = Color.FromArgb(224, 224, 224);
+            ClientSize = new Size(780, 521);
+            Controls.Add(AllClear);
+            Controls.Add(ssMessageArea);
+            Controls.Add(menuStrip1);
             Controls.Add(dgvCarReport);
             Controls.Add(pbPicture);
             Controls.Add(btPicDelete);
@@ -395,17 +434,20 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             Name = "Form1";
-            SizeGripStyle = SizeGripStyle.Hide;
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).EndInit();
-            ssMessagearea.ResumeLayout(false);
-            ssMessagearea.PerformLayout();
+            ssMessageArea.ResumeLayout(false);
+            ssMessageArea.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -440,9 +482,13 @@
         private Button btReportSave;
         private Button btReportOpen;
         private OpenFileDialog ofdPicFileOpen;
-        private StatusStrip ssMessagearea;
+        private StatusStrip ssMessageArea;
         private ToolStripStatusLabel tslbMessage;
-        private SaveFileDialog sfdReportFileSave;
         private OpenFileDialog ofdReportFileOpen;
+        private SaveFileDialog sfdReportFileSave;
+        private Button AllClear;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ファイルFToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem1;
     }
 }
