@@ -2,6 +2,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Metrics;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
@@ -9,6 +12,8 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        Settings settings = new Settings();
 
         //コンストラクタ
         public Form1() {
@@ -131,6 +136,10 @@ namespace CarReportSystem {
             //交互に色設定（データグリッドビュー）
             dgvCarReport.RowsDefaultCellStyle.BackColor = Color.AliceBlue;
             dgvCarReport.AlternatingRowsDefaultCellStyle.BackColor = Color.AntiqueWhite;
+
+            //設定ファイルを逆シリアライズ化して背景を設定
+
+
         }
 
         private void dgvCarReport_Click(object sender, EventArgs e) {
@@ -274,5 +283,34 @@ namespace CarReportSystem {
             // DialogResult result = MessageBox.Show("本当に終了しますか？", "確認", MessageBoxButtons.YesNo);
             //if (result == DialogResult.Yes) Application.Exit();
         }
+
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColor.Color;
+
+                settings.MainFormColor = cdColor.Color.ToArgb();
+            };
+        }
+
+
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルのシリアル化
+            try {
+                using (var writer = XmlWriter.Create("nover.xml")) {
+                    var serializer = new XmlSerializer(settings.GetType());
+                    serializer.Serialize(writer, settings);
+
+                }
+                            
+                       
+            }
+            catch (Exception) {
+                MessageBox.Show("設定ファイル読み込みエラー");
+            }
+        }
     }
 }
+
+
