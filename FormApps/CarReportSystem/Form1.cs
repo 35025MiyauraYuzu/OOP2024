@@ -298,13 +298,11 @@ namespace CarReportSystem {
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルのシリアル化
             try {
-                using (var writer = XmlWriter.Create("nover.xml")) {
+                using (var writer = XmlWriter.Create("settings.xml")) {
                     var serializer = new XmlSerializer(settings.GetType());
                     serializer.Serialize(writer, settings);
 
                 }
-                            
-                       
             }
             catch (Exception) {
                 MessageBox.Show("設定ファイル読み込みエラー");
