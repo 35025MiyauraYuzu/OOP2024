@@ -139,9 +139,12 @@ namespace CarReportSystem {
 
             //設定ファイルを逆シリアライズ化して背景を設定
 
-
+            using (var reader = XmlReader.Create("settings.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                var settings = serializer.Deserialize(reader) as Settings;
+                BackColor = Color.FromArgb(settings.MainFormColor);
+            }
         }
-
         private void dgvCarReport_Click(object sender, EventArgs e) {
             if ((dgvCarReport.Rows.Count == 0)
                 || (!dgvCarReport.CurrentRow.Selected)) return;
@@ -288,12 +291,9 @@ namespace CarReportSystem {
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
-
                 settings.MainFormColor = cdColor.Color.ToArgb();
             };
         }
-
-
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルのシリアル化
