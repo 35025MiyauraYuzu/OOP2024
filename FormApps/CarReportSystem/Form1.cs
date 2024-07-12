@@ -13,7 +13,8 @@ namespace CarReportSystem {
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
-        Settings? settings = new Settings();
+        Settings settings = Settings.GetInstance();
+
 
         //コンストラクタ
         public Form1() {
