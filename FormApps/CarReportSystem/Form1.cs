@@ -13,7 +13,7 @@ namespace CarReportSystem {
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
-        Settings settings = new Settings();
+        Settings? settings = new Settings();
 
         //コンストラクタ
         public Form1() {
@@ -136,15 +136,26 @@ namespace CarReportSystem {
             //交互に色設定（データグリッドビュー）
             dgvCarReport.RowsDefaultCellStyle.BackColor = Color.AliceBlue;
             dgvCarReport.AlternatingRowsDefaultCellStyle.BackColor = Color.AntiqueWhite;
+            if (File.Exists("settings.xml")) {
+                //設定ファイルを逆シリアライズ化して背景を設定
 
-            //設定ファイルを逆シリアライズ化して背景を設定
+                try {
+                    using (var reader = XmlReader.Create("settings.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        var settings = serializer.Deserialize(reader) as Settings;
+                        BackColor = Color.FromArgb(settings.MainFormColor);
+                        settings.MainFormColor = BackColor.ToArgb();
+                    }
 
-            using (var reader = XmlReader.Create("settings.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                var settings = serializer.Deserialize(reader) as Settings;
-                BackColor = Color.FromArgb(settings.MainFormColor);
+                }
+                catch (Exception) {
+                    tslbMessage.Text = "色情報ファイルエラー";
+                }
+            } else {
+                tslbMessage.Text = "色情報ファイルがありません";
             }
         }
+
         private void dgvCarReport_Click(object sender, EventArgs e) {
             if ((dgvCarReport.Rows.Count == 0)
                 || (!dgvCarReport.CurrentRow.Selected)) return;
