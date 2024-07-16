@@ -7,6 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Title>CarReportSystem</Title>
+    <Version> 1.2.1.0</Version>
+    <Author>山本　隆 </Author> 
   </PropertyGroup>
 
   <ItemGroup>
