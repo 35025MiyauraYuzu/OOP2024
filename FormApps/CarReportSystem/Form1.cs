@@ -147,7 +147,6 @@ namespace CarReportSystem {
                         BackColor = Color.FromArgb(settings.MainFormColor);
                         settings.MainFormColor = BackColor.ToArgb();
                     }
-
                 }
                 catch (Exception) {
                     tslbMessage.Text = "色情報ファイルエラー";
@@ -319,6 +318,15 @@ namespace CarReportSystem {
             catch (Exception) {
                 MessageBox.Show("設定ファイル読み込みエラー");
             }
+        }
+
+        private void ヘルプHToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e) {
+            var fmversion = new fmVersion();
+            fmversion.ShowDialog();
         }
     }
 }
