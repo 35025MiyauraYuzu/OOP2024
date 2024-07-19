@@ -53,26 +53,54 @@ namespace Exercise01 {
         private static void Exercise1_3(string file) {
             var xdoc = XDocument.Load(file);
             var xelements = xdoc.Root.Elements()
-                .Select(x=> new {
+                .Select(x => new {
                     Name = x.Element("name").Value,
                     Team = x.Element("teammembers").Value
-                }).OrderByDescending(x=>x.Team).First();
+                }).OrderByDescending(x => x.Team).First();
 
             Console.WriteLine(xelements.Name);
-                
-            
+
+
         }
         private static void Exercise1_4(string file, string newfile) {
-            var element = new XElement(file,
-                 new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
-                 new XElement("teammembers", "11"),
-                 new XElement("firstplayed", "1863")
-                 );
+            List<XElement> list = new List<XElement>();
             var xdoc = XDocument.Load(file);
-            xdoc.Root.Add(element);
+            int bu;
+
+            while (true) {
+                Console.Write("スポーツの名称を入力してください。:");
+                string name = Console.ReadLine();
+                Console.WriteLine();
+
+                Console.Write("スポーツの漢字を入力してください。:");
+                string Kanji = Console.ReadLine();
+                Console.WriteLine();
+
+                Console.Write("スポーツの人数を入力してください。:");
+                string teammember = Console.ReadLine();
+                Console.WriteLine();
+
+                Console.Write("スポーツの起源を入力してください。:");
+                string firstplayed = Console.ReadLine();
+                Console.WriteLine();
+
+                var element = new XElement(file,
+                     new XElement("name", name, new XAttribute("kanji", Kanji)),
+                     new XElement("teammembers", teammember),
+                     new XElement("firstplayed", firstplayed)
+                     );
+                list.Add(element);
+                Console.WriteLine("追加(1) / 保存(2)");
+                bu = int.Parse(Console.ReadLine());
+                if (bu == 2)
+                    break;
+
+                Console.WriteLine();
+            }
+            xdoc.Root.Add(list);
             xdoc.Save(newfile);
-
         }
-
     }
+
 }
+
