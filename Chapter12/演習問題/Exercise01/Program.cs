@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
+
+namespace Exercise01 {
+    internal class Program {
+        static void Main(string[] args) {
+            Exercise1_1("employee.xml");
+
+            // これは確認用
+            Console.WriteLine(File.ReadAllText("employee.xml"));
+            Console.WriteLine();
+
+            Exercise1_2("employees.xml");
+            Exercise1_3("employees.xml");
+
+            Console.WriteLine();
+
+            Exercise1_4("employees.json");
+
+            // これは確認用
+            Console.WriteLine(File.ReadAllText("employees.json"));
+        }
+
+        private static void Exercise1_1(string outfile) {
+#if true
+            var employee = new Employee {
+                Id = 1,
+                Name = "区分 九文",
+                HireDate = DateTime.Now,
+
+            };
+
+            var settings = new XmlWriterSettings {
+                Encoding = new UTF8Encoding(false),
+                Indent = true,
+                IndentChars = " ",
+            };
+
+            using (var writer = XmlWriter.Create(outfile, settings)) {
+                var serializer = new XmlSerializer(employee.GetType());
+                serializer.Serialize(writer, employee);
+            }
+#else
+            using (var reader = XmlReader.Create(outfile)) {
+                var serializer = new XmlSerializer(typeof(Employee));
+                var novel = serializer.Deserialize(reader) as Employee;
+                Console.WriteLine(novel);
+            }
+#endif
+        }
+        private static void Exercise1_2(string outfile) {
+            var emps = new Employee[] {
+                new Employee {
+                    Id=11,
+                    Name ="ハダカデバネズミ",
+                    HireDate =new DateTime(2001,5,10),
+                },
+                new Employee {
+                    Id =12,
+                    Name ="出刃　包丁子",
+                    HireDate =new DateTime(2004,12,1)
+                },
+            };
+
+            var settings = new XmlWriterSettings {
+                Encoding = new UTF8Encoding(false),
+                Indent = true,
+                IndentChars = " ",
+            };
+
+            using (var writer = XmlWriter.Create(outfile, settings)) {
+                var serializer = new DataContractSerializer(emps.GetType());
+                serializer.WriteObject(writer, emps);
+
+            }
+
+        }
+
+        private static void Exercise1_3(string file) {
+            using (var reader = XmlReader.Create(file)) {
+                var serializer = new DataContractSerializer(typeof(Employee[]));
+                var novel = serializer.ReadObject(reader) as Employee[];
+                foreach (var employee in novel) {
+                    Console.WriteLine("{0}{1}{2}",employee.Id,employee.Name,employee.HireDate);
+                }
+            }
+
+        }
+
+        private static void Exercise1_4(string file) {
+
+        }
+    }
+}
