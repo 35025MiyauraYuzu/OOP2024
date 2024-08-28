@@ -116,6 +116,7 @@ namespace Exercise01 {
             //シリアル化 
             using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write)) {
                 var options = new JsonSerializerOptions {
+                    PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseUpper,
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                     WriteIndented = true,
                 };
