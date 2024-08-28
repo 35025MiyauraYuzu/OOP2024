@@ -92,41 +92,37 @@ namespace Exercise01 {
                 var serializer = new DataContractSerializer(typeof(Employee[]));
                 var novel = serializer.ReadObject(reader) as Employee[];
                 foreach (var employee in novel) {
-                    Console.WriteLine("{0} {1} {2}",employee.Id,employee.Name,employee.HireDate);
+                    Console.WriteLine("{0} {1} {2}", employee.Id, employee.Name, employee.HireDate);
                 }
             }
 
         }
 
         private static void Exercise1_4(string file) {
-            var employee = new Employee {
-                Id = 16,
-                Name = "案山子・たかし",
-                HireDate = new DateTime(2000, 3, 1),
-
+            var novels = new Employee[] {
+            new Employee {
+                Id=11,
+                    Name ="ハダカデバネズミ",
+                    HireDate =new DateTime(2001,5,10),
+                 },
+                new Employee {
+                     Id =12,
+                    Name ="出刃　包丁子",
+                    HireDate =new DateTime(2004,12,1)
+                  },
             };
 
 
             //シリアル化 
             using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write)) {
-                var serializer = new DataContractJsonSerializer(employee.GetType());
-                serializer.WriteObject(stream, file);
+                var options = new JsonSerializerOptions {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                    WriteIndented = true,
+                };
+
+                JsonSerializer.Serialize(stream,novels,options);
+                
             }
-
-
-
-            var options = new JsonSerializerOptions {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                WriteIndented = true,
-            };
-
-
-
-            string jsonString = JsonSerializer.Serialize(employee, options);
-            Console.WriteLine(jsonString);
-
-
-
         }
     }
 }

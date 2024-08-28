@@ -38,8 +38,10 @@ namespace Section02 {
 
 
 
-            string jsonString = JsonSerializer.Serialize(novels,options);
+            string jsonString = JsonSerializer.Serialize(novels, options);
             Console.WriteLine(jsonString);
+
+
 
 #endif
         }
