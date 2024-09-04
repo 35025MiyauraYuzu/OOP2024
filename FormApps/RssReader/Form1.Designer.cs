@@ -50,17 +50,19 @@
             // 
             this.lbRssTitle.FormattingEnabled = true;
             this.lbRssTitle.ItemHeight = 12;
-            this.lbRssTitle.Location = new System.Drawing.Point(13, 51);
+            this.lbRssTitle.Location = new System.Drawing.Point(26, 38);
             this.lbRssTitle.Name = "lbRssTitle";
-            this.lbRssTitle.Size = new System.Drawing.Size(731, 268);
+            this.lbRssTitle.Size = new System.Drawing.Size(556, 208);
             this.lbRssTitle.TabIndex = 2;
+            this.lbRssTitle.SelectedIndexChanged += new System.EventHandler(this.lbRssTitle_SelectedIndexChanged);
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(3, 339);
+            this.webBrowser1.Location = new System.Drawing.Point(13, 252);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(916, 250);
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.Size = new System.Drawing.Size(960, 400);
             this.webBrowser1.TabIndex = 3;
             // 
             // Form1

@@ -5,13 +5,19 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace RssReader {
+  
     public partial class Form1 : Form {
+
+        
+        List<ItemDate> xitems;
+
         public Form1() {
             InitializeComponent();
         }
@@ -20,7 +26,16 @@ namespace RssReader {
             using (var wc = new WebClient()) {
                 var url = wc.OpenRead(tbRssUrl.Text);
                 var xdoc = XDocument.Load(url);
-                var xtitles = xdoc.Root.Descendants("item").Elements("title").Select(x => x.Value);
+
+                xitems = xdoc.Root.Descendants("item").Select(x => new ItemDate {
+                    Title = x.Element("title").Value,
+                    Link = x.Element("link").Value,
+
+                }).ToList();
+
+
+
+
                 //Select(x => new {
                 //  Title = x.Elements("title").Select(y => y.Value),
                 //  Link = x.Elements("link").Select(y => y.Value),
@@ -29,11 +44,23 @@ namespace RssReader {
 
                 //Elements("title").Select(x => x.Value);
                 //.Select(Item=>item.Elements("title").Value);
-                foreach (var xtitle in xtitles) {
-                    lbRssTitle.Items.Add(xtitle);
-                }
+            }
+            foreach (var xtitle in xitems.Select(x=>x.Title)) {
+                lbRssTitle.Items.Add(xtitle);
             }
 
         }
+
+        private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
+            //
+
+            webBrowser1.Navigate(xitems[lbRssTitle.SelectedIndex].Link);
+
+        }
+    }
+    //データ格納用クラス
+    public class ItemDate {
+        public string Title { get; set; }
+        public string Link { get; set; }
     }
 }
