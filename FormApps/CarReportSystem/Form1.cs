@@ -22,6 +22,7 @@ namespace CarReportSystem {
             InitializeComponent();
             dgvCarReport.DataSource = listCarReports;
         }
+        
 
         private void btAddReport_Click(object sender, EventArgs e) {
             if (cbAuthor.Text == "" || cbCarName.Text == "") {
