@@ -26,11 +26,11 @@
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.btGet = new System.Windows.Forms.Button();
             this.lbRssTitle = new System.Windows.Forms.ListBox();
-            this.webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.label1 = new System.Windows.Forms.Label();
             this.cbUrl = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btRecord = new System.Windows.Forms.Button();
+            this.webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,18 +62,6 @@
             this.lbRssTitle.Size = new System.Drawing.Size(232, 520);
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.SelectedIndexChanged += new System.EventHandler(this.lbRssTitle_SelectedIndexChanged);
-            // 
-            // webView21
-            // 
-            this.webView21.AllowExternalDrop = true;
-            this.webView21.CreationProperties = null;
-            this.webView21.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.webView21.Location = new System.Drawing.Point(280, 125);
-            this.webView21.Name = "webView21";
-            this.webView21.Size = new System.Drawing.Size(692, 520);
-            this.webView21.TabIndex = 3;
-            this.webView21.ZoomFactor = 1D;
-            this.webView21.Click += new System.EventHandler(this.tbGet_Click);
             // 
             // label1
             // 
@@ -111,16 +99,27 @@
             this.btRecord.UseVisualStyleBackColor = true;
             this.btRecord.Click += new System.EventHandler(this.btRecord_Click);
             // 
+            // webView21
+            // 
+            this.webView21.AllowExternalDrop = true;
+            this.webView21.CreationProperties = null;
+            this.webView21.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.webView21.Location = new System.Drawing.Point(324, 130);
+            this.webView21.Name = "webView21";
+            this.webView21.Size = new System.Drawing.Size(632, 514);
+            this.webView21.TabIndex = 8;
+            this.webView21.ZoomFactor = 1D;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 686);
+            this.Controls.Add(this.webView21);
             this.Controls.Add(this.btRecord);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbUrl);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.webView21);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
             this.Controls.Add(this.tbAuthor);
@@ -138,11 +137,11 @@
         private System.Windows.Forms.TextBox tbAuthor;
         private System.Windows.Forms.Button btGet;
         private System.Windows.Forms.ListBox lbRssTitle;
-        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbUrl;
         private System.Windows.Forms.Button btRecord;
         private System.Windows.Forms.Label label2;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }
 
