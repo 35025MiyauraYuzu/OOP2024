@@ -13,9 +13,19 @@ namespace SampleEntityFramework {
             //AddAuthors();
             // AddBooks();
             //InsertBooks();
-            DisplayAllBooks();
+            //DisplayAllBooks();
             //UpdateBook();
             // DeleteBook();
+            DisplayAllBooks3();
+            Console.WriteLine("#1.3");
+
+            Console.WriteLine();
+            Console.WriteLine("#1.4");
+            Exercise1_4();
+
+            Console.WriteLine();
+
+            Console.ReadLine();
         }
 
 
@@ -137,6 +147,34 @@ namespace SampleEntityFramework {
                     db.SaveChanges();
                 }
             }
+
+        }
+
+        static void DisplayAllBooks3() {
+            using (var db = new BooksDbContext()) {
+                var longtitle = db.Books.Where(b => b.Title.Length == db.Books.Max(x => x.Title.Length));
+                foreach (var book in longtitle) {
+                    Console.WriteLine(book.Title);
+
+                }
+
+            }
+        }
+
+        private static void Exercise1_4() {
+            using (var db = new BooksDbContext()) {
+
+                var oldbook = db.Books.OrderBy(x => x.PublishedYear).ToList();
+                foreach (var book in oldbook.ToString()) {
+                    Console.WriteLine(book);
+
+                }
+            }
+
+        }
+
+
+        private static void Exercise1_5() {
 
         }
     }

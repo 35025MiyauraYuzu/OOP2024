@@ -12,10 +12,12 @@ namespace SampleEntityFramework.Models {
         // アプリケーション構成ファイルで 'BooksDbContext' 接続文字列を変更してください。
         public BooksDbContext()
             : base("name=BooksDbContext") {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BooksDbContext, Configuration>());
+
         }
 
-        public DbSet<Book> Books { get; set;}
-        public DbSet<Author> Authors { get; set;}
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
 
 
         // モデルに含めるエンティティ型ごとに DbSet を追加します。Code First モデルの構成および使用の

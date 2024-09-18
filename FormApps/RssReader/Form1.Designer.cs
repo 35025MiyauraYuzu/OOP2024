@@ -40,8 +40,7 @@
             this.tbAuthor.Name = "tbAuthor";
             this.tbAuthor.Size = new System.Drawing.Size(243, 19);
             this.tbAuthor.TabIndex = 0;
-            this.tbAuthor.Click += new System.EventHandler(this.tbAuthor_Click);
-            this.tbAuthor.TextChanged += new System.EventHandler(this.tbRssUrl_TextChanged);
+            this.tbAuthor.Click += new System.EventHandler(this.btRecord_Click);
             // 
             // btGet
             // 
@@ -51,13 +50,13 @@
             this.btGet.TabIndex = 1;
             this.btGet.Text = "取得";
             this.btGet.UseVisualStyleBackColor = true;
-            this.btGet.Click += new System.EventHandler(this.tbGet_Click);
+            this.btGet.Click += new System.EventHandler(this.btGet_Click);
             // 
             // lbRssTitle
             // 
             this.lbRssTitle.FormattingEnabled = true;
             this.lbRssTitle.ItemHeight = 12;
-            this.lbRssTitle.Location = new System.Drawing.Point(26, 125);
+            this.lbRssTitle.Location = new System.Drawing.Point(38, 102);
             this.lbRssTitle.Name = "lbRssTitle";
             this.lbRssTitle.Size = new System.Drawing.Size(232, 520);
             this.lbRssTitle.TabIndex = 2;
@@ -104,7 +103,7 @@
             this.webView21.AllowExternalDrop = true;
             this.webView21.CreationProperties = null;
             this.webView21.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.webView21.Location = new System.Drawing.Point(324, 130);
+            this.webView21.Location = new System.Drawing.Point(326, 102);
             this.webView21.Name = "webView21";
             this.webView21.Size = new System.Drawing.Size(632, 514);
             this.webView21.TabIndex = 8;
@@ -125,7 +124,6 @@
             this.Controls.Add(this.tbAuthor);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,22 +1,52 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.WinForms;
+
+using System;
+
 using System.Collections.Generic;
+
+using System.ComponentModel;
+
 using System.Data;
+
+using System.Drawing;
+
 using System.Linq;
+
 using System.Net;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
 using System.Windows.Forms;
+
 using System.Xml.Linq;
+
+using Microsoft.Web.WebView2.Core;
+
+//using Microsoft.Toolkit.Forms.UI.Controls;
+
+using Microsoft.Web.WebView2.Wpf;
+
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RssReader {
 
     public partial class Form1 : Form {
 
 
-        List<ItemDate> items;
+        List<ItemData> items;
         List<Category> categories;
 
         public Form1() {
             InitializeComponent();
             InitializeCategory();
+
+            webView21.EnsureCoreWebView2Async(null);
+
+          //  AddCbBox();
+
+            cbUrl.SelectedIndex = -1;
 
         }
         private void InitializeCategory() {
@@ -40,85 +70,93 @@ namespace RssReader {
         }
 
 
-        private void tbGet_Click(object sender, EventArgs e) {
-            string selecturl;
-            if (cbUrl.SelectedItem is Category s) {
-
-            }
 
 
-            using (var wc = new WebClient()) {
-                var url = wc.OpenRead(cbUrl.Text);
-                var xdoc = XDocument.Load(url);
-
-                items = xdoc.Root.Descendants("item").Select(x => new ItemDate() {
-                    Title = x.Element("title").Value,
-                    Link = x.Element("link").Value,
-
-                }).ToList();
-
-                //Select(x => new {
-                //  Title = x.Elements("title").Select(y => y.Value),
-                //  Link = x.Elements("link").Select(y => y.Value),
-                // });
-
-
-                //Elements("title").Select(x => x.Value);
-                //.Select(Item=>item.Elements("title").Value);
-            }
-            foreach (var xtitle in items.Select(x => x.Title)) {
-                lbRssTitle.Items.Add(xtitle);
-            }
+        private void AddCbBox() {
+          //  cbUrl.DataSource = new Categor
+           
 
         }
+
+        private void Form_Resize(object sender, EventArgs e) {
+
+           // webView21.Size = this.ClientSize - new System.Drawing.Size(webView21.Location);
+
+        }
+
+        private async void btGet_Click(object sender, EventArgs e) {
+
+            string selecturl;
+            if (cbUrl.SelectedItem is Category h) {
+                selecturl = h.Url;
+            } else {
+                selecturl = cbUrl.Text;
+            }
+            if (!string.IsNullOrWhiteSpace(selecturl)) {
+                using (var wc = new WebClient()) {
+                    wc.Encoding = Encoding.UTF8;
+                    var rssData = await wc.DownloadStringTaskAsync(selecturl);
+
+                    var xdoc = XDocument.Parse(rssData);
+                    items = xdoc.Root.Descendants("item")
+                                            .Select(item => new ItemData {
+                                                Title = item.Element("title").Value,
+                                                Link = item.Element("link").Value,
+                                            }).ToList();
+                    lbRssTitle.Invoke(new Action(() => {
+                        lbRssTitle.Items.Clear();
+                        foreach (var item in items) {
+                            lbRssTitle.Items.Add(item.Title);
+
+                            //検索
+
+                            //     string cbBox = cbUrl.Text;
+
+                            //       if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
+
+                            //           if (cbUrl.Text.Contains("yahoo.co.jp/rss/")) {
+
+
+
+                        }
+                    }));
+
+                }
+            }
+        }
+
 
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
 
-
             if (webView21 != null && webView21.CoreWebView2 != null) {
+
                 webView21.CoreWebView2.Navigate(items[lbRssTitle.SelectedIndex].Link);
+
             }
-            // Uri uri = new Uri(xitems[lbRssTitle.SelectedIndex].Link);
-
-            //webView2のsourceプロパティにuriをセット
-            // webView21.Source = uri;
-
-
-
-            //   webView21.Source =new Uri(xitems[lbRssTitle.SelectedIndex].Link);
 
         }
 
-        private void webView21_Click(object sender, EventArgs e) {
-
-        }
-
-        private void tbRssUrl_TextChanged(object sender, EventArgs e) {
-
-        }
-
+       
         private void btRecord_Click(object sender, EventArgs e) {
-            string cate = tbAuthor.Text;
-            string url = items[lbRssTitle.SelectedIndex].Link;
-            var newcate = new Category(cate, url);
-            categories.Add(newcate);
-            cbUrl.Refresh();
+            string categoryTitle = tbAuthor.Text;
+            string url = cbUrl.Text;
+            var favorite = new Category(categoryTitle, url);
+            categories.Add(favorite);
 
-        }
 
-        private void setCbUrl(string Name, Uri uri) {
-            if (!cbUrl.Items.Contains(Name) && !cbUrl.Items.Contains(uri))
-                cbUrl.Items.Add(Name);
-        }
-        private void Form1_Load(object sender, EventArgs e) {
-
-        }
-
-        private void tbAuthor_Click(object sender, EventArgs e) {
 
         }
     }
 
+    //データ格納用のクラス
+
+    public class ItemData {
+
+        public string Title { get; set; }
+
+        public string Link { get; set; }
+
+    }
     public class Category {
         public string Title { get; set; }
         public string Url { get; set; }
@@ -129,11 +167,5 @@ namespace RssReader {
     }
 
 
-
-    //データ格納用クラス
-    public class ItemDate {
-        public string Title { get; set; }
-        public string Link { get; set; }
-
-    }
 }
+
