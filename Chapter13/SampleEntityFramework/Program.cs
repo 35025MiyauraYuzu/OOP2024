@@ -1,6 +1,7 @@
 ﻿using SampleEntityFramework.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,8 @@ namespace SampleEntityFramework {
             Exercise1_4();
 
             Console.WriteLine();
-
+            Console.WriteLine("#1.5");
+            Exercise1_5();
             Console.ReadLine();
         }
 
@@ -163,10 +165,10 @@ namespace SampleEntityFramework {
 
         private static void Exercise1_4() {
             using (var db = new BooksDbContext()) {
-
-                var oldbook = db.Books.OrderBy(x => x.PublishedYear).ToList();
-                foreach (var book in oldbook.ToString()) {
-                    Console.WriteLine(book);
+                var oldbook = db.Books.OrderBy(x => x.PublishedYear)
+                    .Include(nameof(Author));
+                foreach (var book in oldbook.Take(3)) {
+                    Console.WriteLine(book.Title, book.Author.Name);
 
                 }
             }
@@ -175,7 +177,16 @@ namespace SampleEntityFramework {
 
 
         private static void Exercise1_5() {
+            using (var db = new BooksDbContext()) {
+                var authors = db.Authors.OrderByDescending(a => a.Birthday).ToList();
+                foreach (var author in authors) {
+                    Console.WriteLine(author.Name);
+                    foreach (var book in author.Books) {
+                        Console.WriteLine("   {0}   {1}", book.Title, book.PublishedYear);
+                    }
+                }
 
+            }
         }
     }
 }
