@@ -36,17 +36,20 @@
             // 
             // tbAuthor
             // 
-            this.tbAuthor.Location = new System.Drawing.Point(190, 67);
+            this.tbAuthor.Location = new System.Drawing.Point(300, 80);
+            this.tbAuthor.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.tbAuthor.Name = "tbAuthor";
-            this.tbAuthor.Size = new System.Drawing.Size(243, 19);
+            this.tbAuthor.Size = new System.Drawing.Size(594, 26);
             this.tbAuthor.TabIndex = 0;
             this.tbAuthor.Click += new System.EventHandler(this.btRecord_Click);
+            this.tbAuthor.TextChanged += new System.EventHandler(this.tbAuthor_TextChanged);
             // 
             // btGet
             // 
-            this.btGet.Location = new System.Drawing.Point(838, 26);
+            this.btGet.Location = new System.Drawing.Point(1052, 12);
+            this.btGet.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.btGet.Name = "btGet";
-            this.btGet.Size = new System.Drawing.Size(75, 23);
+            this.btGet.Size = new System.Drawing.Size(120, 27);
             this.btGet.TabIndex = 1;
             this.btGet.Text = "取得";
             this.btGet.UseVisualStyleBackColor = true;
@@ -54,45 +57,51 @@
             // 
             // lbRssTitle
             // 
+            this.lbRssTitle.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.lbRssTitle.FormattingEnabled = true;
-            this.lbRssTitle.ItemHeight = 12;
-            this.lbRssTitle.Location = new System.Drawing.Point(38, 102);
+            this.lbRssTitle.ItemHeight = 19;
+            this.lbRssTitle.Location = new System.Drawing.Point(33, 124);
+            this.lbRssTitle.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.lbRssTitle.Name = "lbRssTitle";
-            this.lbRssTitle.Size = new System.Drawing.Size(232, 520);
+            this.lbRssTitle.Size = new System.Drawing.Size(223, 498);
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.SelectedIndexChanged += new System.EventHandler(this.lbRssTitle_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 29);
+            this.label1.Location = new System.Drawing.Point(29, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 12);
+            this.label1.Size = new System.Drawing.Size(259, 19);
             this.label1.TabIndex = 4;
             this.label1.Text = "URLまたはお気に入りを入力";
             // 
             // cbUrl
             // 
             this.cbUrl.FormattingEnabled = true;
-            this.cbUrl.Location = new System.Drawing.Point(190, 26);
+            this.cbUrl.Location = new System.Drawing.Point(300, 13);
+            this.cbUrl.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.cbUrl.Name = "cbUrl";
-            this.cbUrl.Size = new System.Drawing.Size(642, 20);
+            this.cbUrl.Size = new System.Drawing.Size(720, 27);
             this.cbUrl.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(83, 74);
+            this.label2.Location = new System.Drawing.Point(69, 87);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 12);
+            this.label2.Size = new System.Drawing.Size(209, 19);
             this.label2.TabIndex = 6;
-            this.label2.Text = "お気に入り名称";
+            this.label2.Text = "お気に入り名称を入力";
             // 
             // btRecord
             // 
-            this.btRecord.Location = new System.Drawing.Point(454, 63);
+            this.btRecord.Location = new System.Drawing.Point(906, 80);
+            this.btRecord.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.btRecord.Name = "btRecord";
-            this.btRecord.Size = new System.Drawing.Size(75, 26);
+            this.btRecord.Size = new System.Drawing.Size(96, 32);
             this.btRecord.TabIndex = 7;
             this.btRecord.Text = "登録";
             this.btRecord.UseVisualStyleBackColor = true;
@@ -103,17 +112,19 @@
             this.webView21.AllowExternalDrop = true;
             this.webView21.CreationProperties = null;
             this.webView21.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.webView21.Location = new System.Drawing.Point(326, 102);
+            this.webView21.Location = new System.Drawing.Point(279, 124);
+            this.webView21.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.webView21.Name = "webView21";
-            this.webView21.Size = new System.Drawing.Size(632, 514);
+            this.webView21.Size = new System.Drawing.Size(1134, 498);
             this.webView21.TabIndex = 8;
             this.webView21.ZoomFactor = 1D;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 686);
+            this.BackColor = System.Drawing.SystemColors.Info;
+            this.ClientSize = new System.Drawing.Size(1640, 1086);
             this.Controls.Add(this.webView21);
             this.Controls.Add(this.btRecord);
             this.Controls.Add(this.label2);
@@ -122,6 +133,8 @@
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
             this.Controls.Add(this.tbAuthor);
+            this.Font = new System.Drawing.Font("ＭＳ 明朝", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).EndInit();
