@@ -150,7 +150,7 @@ namespace RssReader {
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+         
         private void clear() {
             cbUrl.Text = null;
             tbAuthor.Clear();
