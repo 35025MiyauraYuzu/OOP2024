@@ -123,18 +123,18 @@ namespace Exercise01 {
 
         private static void Exercise1_8() {
             var categoryid = Library.Categories
-                .GroupJoin(Library.Books,
-                           c => c.Id,
-                           b => b.CategoryId,
-                           (c, books) => new {
-                               Category = c.Name,
-                               Count = books.Count(),
+                                     .GroupJoin(Library.Books,
+                                      c => c.Id,
+                                      b => b.CategoryId,
+                                     (c, b) => new {
+                                         Category = c.Name,
+                                         Count = b.Count(),
 
-                           }).Where(b => b.Count >= 4);
+                                     }).Where(b => b.Count >= 4);
 
 
             foreach (var item in categoryid) {
-                Console.WriteLine("#{0}", item.Category);
+                Console.WriteLine("#{0}", item.Category + "(" + item.Count + "冊)");
             }
         }
     }
