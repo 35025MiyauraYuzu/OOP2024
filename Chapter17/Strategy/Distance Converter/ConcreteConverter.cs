@@ -43,7 +43,7 @@ namespace Distance_Converter {
         public override bool IsMyUnit(string name) {
             return name.ToLower() == "mile" || name == UnitName;
         }
-        protected override double Ratio { get { return 1.609; } }
+        protected override double Ratio { get { return 1609.344; } }
         public override string UnitName { get { return "マイル"; } }
     }
 
