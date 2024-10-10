@@ -12,10 +12,12 @@ namespace Distance_Converter {
             new FeetConverter(),
             new YardConverter(),
             new InchConverter(),
+            new MileConverter(),
+            new KilometerConverter(),
         };
 
-        public static ConverterBase GetInstance(string name){
-            return _converters.FirstOrDefault(x=>x.IsMyUnit(name));
+        public static ConverterBase GetInstance(string name) {
+            return _converters.FirstOrDefault(x => x.IsMyUnit(name));
         }
     }
 }
