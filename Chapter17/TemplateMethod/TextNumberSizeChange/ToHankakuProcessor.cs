@@ -11,7 +11,7 @@ namespace TextNumberSizeChange {
 
         private int _count;
         private StringBuilder _text = new StringBuilder();
-
+        　
         public void Executem(string line) {
             string convertedLine = ConvertToHankakuNumbers(line);
             _text.AppendLine(convertedLine);
