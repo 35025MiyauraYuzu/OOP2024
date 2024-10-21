@@ -21,5 +21,20 @@ namespace CollarChecker {
         public MainWindow() {
             InitializeComponent();
         }
+
+        private void Silder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            var rvalue = (int)rSilder.Value;
+            var gvalue = (int)gSilder.Value;
+            var bvalue = (int)bSilder.Value;
+
+            //rVAlue.Text = rvalue;
+            //gVAlue =
+            //bVAlue =
+
+            coloArea.Background = new SolidColorBrush(Color.FromRgb((byte)rvalue,
+                                                                    (byte)gvalue,
+                                                                    (byte)bvalue));
+
+        }
     }
 }
