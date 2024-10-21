@@ -8,7 +8,7 @@
         Title="MainWindow" Height="100" Width="300">
     <StackPanel>
         <Slider x:Name="SampleSlider"/>
-        <TextBox Text="{Binding ElementName=SampleSlider,Path=Value, Mode=OneTime}"/>
+        <TextBox Text="{Binding ElementName=SampleSlider,Path=Value, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
 
     </StackPanel>
