@@ -27,13 +27,20 @@ namespace CollarChecker {
             var gvalue = (int)gSilder.Value;
             var bvalue = (int)bSilder.Value;
 
-            //rVAlue.Text = rvalue;
-            //gVAlue =
-            //bVAlue =
+            rVAlue.Text = rvalue.ToString();
+            gVAlue.Text = gvalue.ToString();
+            bVAlue.Text = bvalue.ToString();
 
             coloArea.Background = new SolidColorBrush(Color.FromRgb((byte)rvalue,
                                                                     (byte)gvalue,
                                                                     (byte)bvalue));
+
+        }
+
+        private void stockButton_Click(object sender, RoutedEventArgs e) {
+
+
+
 
         }
     }
