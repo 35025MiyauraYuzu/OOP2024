@@ -23,14 +23,17 @@ namespace CollarChecker {
         }
 
         private void Silder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            //値を入手
             var rvalue = (int)rSilder.Value;
             var gvalue = (int)gSilder.Value;
             var bvalue = (int)bSilder.Value;
 
+            //テキストに表示
             rVAlue.Text = rvalue.ToString();
             gVAlue.Text = gvalue.ToString();
             bVAlue.Text = bvalue.ToString();
 
+            //coloAreaの背景を変更
             coloArea.Background = new SolidColorBrush(Color.FromRgb((byte)rvalue,
                                                                     (byte)gvalue,
                                                                     (byte)bvalue));
