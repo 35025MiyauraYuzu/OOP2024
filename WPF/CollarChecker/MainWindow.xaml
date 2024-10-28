@@ -44,7 +44,7 @@
             <Slider x:Name="gSilder" Grid.Column="1" Grid.Row="1"  Maximum="255" VerticalAlignment="Center" ValueChanged="Silder_ValueChanged"/>
             <Slider x:Name="bSilder" Grid.Column="1" Grid.Row="2"  Maximum="255" VerticalAlignment="Center" ValueChanged="Silder_ValueChanged"/>
 
-            <ComboBox x:Name="colorSelectComboBox" Grid.Column="1"  Grid.Row="3"  VerticalAlignment="Center"  ItemsSource="{Binding}" SelectedValue="{Binding Color}" SelectionChanged="colorSelectComboBox_SelectionChanged" >
+            <ComboBox x:Name="colorSelectComboBox" Grid.ColumnSpan="3"  Grid.Row="3"  VerticalAlignment="Center" Margin="17"  ItemsSource="{Binding}" SelectedValue="{Binding Color}" SelectionChanged="colorSelectComboBox_SelectionChanged" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

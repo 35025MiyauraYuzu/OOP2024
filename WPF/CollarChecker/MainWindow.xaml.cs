@@ -28,9 +28,10 @@ namespace CollarChecker {
             InitializeComponent();
             //αチャンネルの初期値を設定(起動時すぐにストックボタンが押された時の対応)
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
-            colorSelectComboBox.DataContext = getColorList();
+            colorSelectComboBox.DataContext = getColorList();//カラーリストをコンボボックスにセット
         }
 
+        //スライダーの値を入手してcoloAreaの背景変更
         private void Silder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             //値を入手
 
@@ -38,9 +39,7 @@ namespace CollarChecker {
             //      Color = Color.FromRgb((byte)rSilder.Value, (byte)gSilder.Value, (byte)bSilder.Value),
             //     Name = "",
             //  };
-
             currentColor.Color = Color.FromRgb((byte)rSilder.Value, (byte)gSilder.Value, (byte)bSilder.Value);
-
             //テキストに表示
             //  rVAlue.Text = rvalue.ToString();
             // gVAlue.Text = gvalue.ToString();
@@ -50,36 +49,56 @@ namespace CollarChecker {
             coloArea.Background = new SolidColorBrush(currentColor.Color);
         }
 
+        //ストックボタン
         private void stockButton_Click(object sender, RoutedEventArgs e) {
+            ////重複しているか確認
+            //bool exists = stockList.Items.Cast<MyColor>().Any(item => item.Color == currentColor.Color);
 
-            if (stockList.Items.Contains(currentColor) == true) {
+            ////重複していなければstockListに追加
+            //if (!exists) {
+            //    stockList.Items.Insert(0, currentColor);
+            //}
 
+
+            //正解バージョン
+            if (stockList.Items.Contains((MyColor)currentColor)) {
+                MessageBox.Show("登録済みです");
+            } else {
+
+                stockList.Items.Insert(0, currentColor);
             }
-            stockList.Items.Insert(0, currentColor);
+
         }
 
+        //リストを選択
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
             coloArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
-            rSilder.Value = ((MyColor)stockList.Items[stockList.SelectedIndex]).Color.R;
-            gSilder.Value = ((MyColor)stockList.Items[stockList.SelectedIndex]).Color.G;
-            bSilder.Value = ((MyColor)stockList.Items[stockList.SelectedIndex]).Color.B;
 
+            setSilderValue(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
         }
 
+        //各スライダーの値設定
+        private void setSilderValue(Color color) {
+            rSilder.Value = color.R;
+            gSilder.Value = color.G;
+            bSilder.Value = color.B;
+        }
+
+        //色取得リスト
         private MyColor[] getColorList() {
             return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
+        //コンボボックスのCollar取得  
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
-            var color = mycolor.Color;
-            var name = mycolor.Name;
+            currentColor = (MyColor)((ComboBox)sender).SelectedItem;
 
-            coloArea.Background = new SolidColorBrush(mycolor.Color);
+            coloArea.Background = new SolidColorBrush(currentColor.Color);
 
-           
+            setSilderValue(currentColor.Color);
+
         }
     }
 }
