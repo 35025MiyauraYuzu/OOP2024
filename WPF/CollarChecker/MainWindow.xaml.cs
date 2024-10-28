@@ -47,6 +47,7 @@ namespace CollarChecker {
 
             //coloAreaの背景を変更
             coloArea.Background = new SolidColorBrush(currentColor.Color);
+            currentColor.Name = null;
         }
 
         //ストックボタン
@@ -61,17 +62,24 @@ namespace CollarChecker {
 
 
             //正解バージョン
-            if (stockList.Items.Contains((MyColor)currentColor)) {
-                MessageBox.Show("登録済みです");
-            } else {
+            if (!stockList.Items.Contains((MyColor)currentColor) || stockList.Items.Contains(currentColor.Name)
+                ) {
+                if (currentColor.Name != null) {
+                    stockList.Items.Insert(0, currentColor);
+                } else {
+                    stockList.Items.Insert(0, currentColor);
+                }
 
-                stockList.Items.Insert(0, currentColor);
+            } else {
+                MessageBox.Show("登録済みです");
             }
 
+            currentColor.Name = null;
         }
 
         //リストを選択
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
 
             coloArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
 
@@ -93,12 +101,13 @@ namespace CollarChecker {
 
         //コンボボックスのCollar取得  
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            currentColor = (MyColor)((ComboBox)sender).SelectedItem;
+            var tempcurrentColor = currentColor = (MyColor)((ComboBox)sender).SelectedItem;
 
-            coloArea.Background = new SolidColorBrush(currentColor.Color);
+            //coloArea.Background = new SolidColorBrush(currentColor.Color);
 
             setSilderValue(currentColor.Color);
 
+            currentColor.Name = tempcurrentColor.Name;
         }
     }
 }
