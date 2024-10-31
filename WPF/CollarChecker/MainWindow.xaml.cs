@@ -11,34 +11,45 @@ namespace CollarChecker {
     public partial class MainWindow : Window {
 
         MyColor currentColor; //現在設定している色情報
+        MyColor[] colorsTable;
 
         public MainWindow() {
             InitializeComponent();
             //αチャンネルの初期値を設定(起動時すぐにストックボタンが押された時の対応)
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
-            colorSelectComboBox.DataContext = getColorList();//カラーリストをコンボボックスにセット
+            DataContext = colorsTable = getColorList();
+            //colorSelectComboBox.DataContext = getColorList();//カラーリストをコンボボックスにセット
         }
 
         //スライダーの値を入手してcoloAreaの背景変更
         private void Silder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             //値を入手
-
             // currentColor = new MyColor {
             //      Color = Color.FromRgb((byte)rSilder.Value, (byte)gSilder.Value, (byte)bSilder.Value),
             //     Name = "",
             //  };
-            currentColor.Color = Color.FromRgb((byte)rSilder.Value, (byte)gSilder.Value, (byte)bSilder.Value);
             //テキストに表示
             //  rVAlue.Text = rvalue.ToString();
             // gVAlue.Text = gvalue.ToString();
             //  bVAlue.Text = bvalue.ToString();
-
             //coloAreaの背景を変更
+            //  stockButton.Background = new SolidColorBrush(currentColor.Color);
+
+            currentColor.Color = Color.FromRgb((byte)rSilder.Value, (byte)gSilder.Value, (byte)bSilder.Value);
+
+            int i;
+            for (i=0; i<colorsTable.Length;i++) {
+                if (colorsTable[i].Color.Equals(currentColor.Color)) {
+                    currentColor.Name= colorsTable[i].Name;
+                    break;
+                }
+            }
+
+            colorSelectComboBox.SelectedIndex = i;
+
+            //currentColor.Name = colorsTable.Where(c => c.Color.Equals(currentColor.Color)).Select(x=>x.Name).FirstOrDefault();
             coloArea.Background = new SolidColorBrush(currentColor.Color);
-            stockButton.Background = new SolidColorBrush(currentColor.Color);
-            currentColor.Name = getColorList().Where(c => c.Equals(currentColor.Name,colorSelectComboBox.Name));
-            
-            
+
         }
 
         //ストックボタン
@@ -55,11 +66,8 @@ namespace CollarChecker {
             //正解バージョン
             if (!stockList.Items.Contains((MyColor)currentColor) || stockList.Items.Contains(currentColor.Name)
                 ) {
-                if (currentColor.Name != null) {
                     stockList.Items.Insert(0, currentColor);
-                } else {
-                    stockList.Items.Insert(0, currentColor);
-                }
+                
 
             } else {
                 MessageBox.Show("登録済みです");
