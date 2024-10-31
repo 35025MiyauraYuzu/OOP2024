@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Converters;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CollarChecker {
     /// <summary>
@@ -47,7 +35,10 @@ namespace CollarChecker {
 
             //coloAreaの背景を変更
             coloArea.Background = new SolidColorBrush(currentColor.Color);
-            currentColor.Name = null;
+            stockButton.Background = new SolidColorBrush(currentColor.Color);
+            currentColor.Name = getColorList().Where(c => c.Equals(currentColor.Name,colorSelectComboBox.Name));
+            
+            
         }
 
         //ストックボタン
@@ -79,11 +70,12 @@ namespace CollarChecker {
 
         //リストを選択
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            
+            
+                coloArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
 
-
-            coloArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
-
-            setSilderValue(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
+                setSilderValue(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
+            
         }
 
         //各スライダーの値設定
@@ -91,6 +83,7 @@ namespace CollarChecker {
             rSilder.Value = color.R;
             gSilder.Value = color.G;
             bSilder.Value = color.B;
+            
         }
 
         //色取得リスト
@@ -108,6 +101,15 @@ namespace CollarChecker {
             setSilderValue(currentColor.Color);
 
             currentColor.Name = tempcurrentColor.Name;
+
+           // colorSelectComboBox.SelectedIndex=-1;
+        }
+
+        //削除ボタン
+        private void deleteButton_Click(object sender, RoutedEventArgs e) {
+            if (stockList.SelectedItems !=null) {
+                stockList.Items.Remove(stockList.Items[stockList.SelectedIndex]);
+            }
         }
     }
 }
