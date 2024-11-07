@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleWeightUnitConverter.Model {
+namespace SampleWeightUnitConverter {
+    //グラム単位を表すクラス
     public class Gramunit : WeightUnit {
         private static List<Gramunit> units = new List<Gramunit> {
              new Gramunit {Name ="g", Conefficient = 1,},
@@ -20,7 +21,7 @@ namespace SampleWeightUnitConverter.Model {
         /// <param name="value"></param>
         /// <returns></returns>
         public double FromoPoundUnit(PoundUnit unit, double value) {
-            return (value * unit.Conefficient) / 28.34952 / this.Conefficient;
+            return (value * unit.Conefficient) / 28.35 / this.Conefficient;
 
         }
 

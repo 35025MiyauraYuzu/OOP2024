@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 namespace SampleWeightUnitConverter {
-    public class ViewModels : INotifyPropertyChanged {
+    public class ViewModel : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null) {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleWeightUnitConverter.Model {
+namespace SampleWeightUnitConverter {
     public class PoundUnit:WeightUnit {
         private static List<PoundUnit> units = new List<PoundUnit> {
               new PoundUnit {Name ="oz", Conefficient = 1,},
-              new PoundUnit {Name ="lb", Conefficient = 1*0.0625,},
+              new PoundUnit {Name ="lb", Conefficient = 16,},
         };
 
 
@@ -22,7 +22,7 @@ namespace SampleWeightUnitConverter.Model {
         /// <param name="value"></param>
         /// <returns></returns>
         public double FromGramUnit(Gramunit unit, double value) {
-            return (value * unit.Conefficient) * 0.0353 / this.Conefficient;
+            return (value * unit.Conefficient) * 28.35 / this.Conefficient;
 
         }
 
