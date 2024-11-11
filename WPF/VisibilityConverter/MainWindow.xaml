@@ -8,13 +8,12 @@
         Title="MainWindow" Height="250" Width="300">
     <Window.Resources>
         <SolidColorBrush x:Key="ButtonBrushKey" Color="White"/>
-        <SolidColorBrush x:Key="BrushKey" Color="Red"/>
     </Window.Resources>
     <StackPanel>
-        
+
         <StackPanel.Resources>
             <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
-            <SolidColorBrush x:Key="ButtonBrushKey" Color="GreenYellow"/>
+          
         </StackPanel.Resources>
 
         <CheckBox x:Name="CheckBox" Content="設定大項目"/>
@@ -24,24 +23,18 @@
 
 
 
-            <RadioButton Content="赤">
-                <RadioButton.Resources>
-                    <SolidColorBrush x:Key="aBrushKey" Color="Red"/>
-                </RadioButton.Resources>
-            </RadioButton>
-            <RadioButton Content="青">
-                <RadioButton.Resources>
-                    <SolidColorBrush x:Key="bBrushKey" Color="Blue"/>
-                </RadioButton.Resources>
-            </RadioButton>
-            <RadioButton Content="緑">
-                <RadioButton.Resources>
-                    <SolidColorBrush x:Key="nBrushKey" Color="Green"/>
-                </RadioButton.Resources>
-            </RadioButton>
+            <RadioButton Content="赤" Click="RadioButton_Click"/>
+
+
+            <RadioButton Content="青" Click="RadioButton_Click"/>
+
+
+            <RadioButton Content="緑" Click="RadioButton_Click"/>
+
+
         </StackPanel>
 
-        <Button Margin="10" Content="ボタン1" Background="{DynamicResource }"/>
+        <Button Margin="10" Content="ボタン1" Background="{DynamicResource ButtonBrushKey}"/>
         <Button Margin="10" Content="ボタン2" Background="{StaticResource ButtonBrushKey}"/>
         <Button Margin="10" Content="ボタン3" >
             <Button.Resources>
