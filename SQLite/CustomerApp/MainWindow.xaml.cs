@@ -28,13 +28,11 @@ namespace CustomerApp {
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
+                Address = AddressTextBox.Text,
 
             };
-            var databassName = "Shop.db";
-            var folderPass = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var databassPass = System.IO.Path.Combine(folderPass, databassName);
 
-            using (var connection = new SQLiteConnection(databassPass)) {
+            using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
             }
@@ -42,13 +40,12 @@ namespace CustomerApp {
         }
 
         private void ReadButton_Click(object sender, RoutedEventArgs e) {
-            var databassName = "Shop.db";
-            var folderPass = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var databassPass = System.IO.Path.Combine(folderPass, databassName);
 
-            using (var connection = new SQLiteConnection(databassPass)) {
+            using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 var customers = connection.Table<Customer>().ToList();
+
+                CustomerListView.ItemsSource = customers;
             }
         }
     }
