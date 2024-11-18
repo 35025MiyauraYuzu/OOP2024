@@ -21,6 +21,7 @@ namespace CustomerApp {
     /// </summary>
     public partial class MainWindow : Window {
         List<Customer> _customers;
+        Image _image;
 
         public MainWindow() {
             InitializeComponent();
@@ -33,11 +34,13 @@ namespace CustomerApp {
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
 
+
             };
 
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
+                
             }
 
             NameTextBox.Text = "";
