@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="465" Width="300">
+        Title="MainWindow" Height="700" Width="300" MouseDown="Window_MouseDown">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -25,24 +26,40 @@
                 <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"/>
                 <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="画像" Grid.Row="3" Grid.Column="0"/>
+                <Button x:Name="ImageButton" Content="画像選択" Grid.Row="3" Grid.Column="1" Click="ImageButtonClear_Click"/>
 
             </Grid>
 
+            <Image x:Name="SelectImage" Height="150"   Margin="10"/>
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click"/>
             <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButton_Click"/>
             <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click"/>
+            <Button Content="画像をクリア" x:Name="ImageButtonClear"  Click="ImageButtonClear_Click_1"/>
             <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged"/>
 
             <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Id}"/>
-                            <TextBlock Text="{Binding Name}" FontSize="20"/>
-                            <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
-                            <TextBlock Text="{Binding Address}" Foreground="PaleGreen"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="AUTO"/>
+                                <RowDefinition Height="AUTO"/>
+                                <RowDefinition Height="AUTO"/>
+                                <RowDefinition Height="AUTO"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
 
-                        </StackPanel>
+                            <TextBlock Text="{Binding Id}" Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Text="{Binding Name}" FontSize="20" Grid.Column="0" Grid.Row="1"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Blue" Grid.Column="0" Grid.Row="2"/>
+                            <TextBlock Text="{Binding Address}" Foreground="PaleGreen" Grid.Column="0" Grid.Row="3"/>
+                            <Image  Source="{Binding Image}" Grid.Column="1" Height="100" Width="100"/>
+
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
