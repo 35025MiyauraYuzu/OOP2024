@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,11 +40,16 @@ namespace CustomerApp {
                 Image = _image,
 
             };
-
+            if (customer.Name == "") {
+                MessageBox.Show("名前が入力されていません。",
+                    "エラー",
+                    MessageBoxButton.OK
+                  );
+                return;
+            }
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
-
 
             }
 
@@ -60,6 +66,8 @@ namespace CustomerApp {
             AddressTextBox.Clear();
             _image = "";
             SelectImage.Source = null;
+            CustomerListView.SelectedItem = null;
+
         }
 
         //アップデート
@@ -74,6 +82,7 @@ namespace CustomerApp {
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
+            item.Image = SelectImage.Source.ToString();
 
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
@@ -133,14 +142,18 @@ namespace CustomerApp {
             //SelectImage.Source = [CustomerListView.SelectedIndex].Image;
             // SelectImage.Source = new BitmapImage(new Uri(_customers[CustomerListView.SelectedIndex].Image));
 
-            if (_customers[CustomerListView.SelectedIndex].Image != null) {
-                SelectImage.Source = new BitmapImage(new Uri(_customers[CustomerListView.SelectedIndex].Image));
+
+
+            if (/*_customers[CustomerListView.SelectedIndex].Image != null*/
+                item.Image != "") {
+                //  SelectImage.Source = new BitmapImage(new Uri(_customers[CustomerListView.SelectedIndex].Image));
+                SelectImage.Source = new BitmapImage(new Uri(item.Image));
             }
             return;
         }
 
         //保存する画像を選択
-        private void ImageButtonClear_Click(object sender, RoutedEventArgs e) {
+        private void ImageButtonSelect_Click(object sender, RoutedEventArgs e) {
 
             var di = new OpenFileDialog();
             if (di.ShowDialog() == true) {
@@ -151,7 +164,7 @@ namespace CustomerApp {
             }
         }
 
-        private void ImageButtonClear_Click_1(object sender, RoutedEventArgs e) {
+        private void ImageButtonClear_Click(object sender, RoutedEventArgs e) {
             SelectImage.Source = null;
 
         }

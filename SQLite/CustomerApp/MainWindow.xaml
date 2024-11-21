@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="300" MouseDown="Window_MouseDown">
+        Title="顧客管理" Height="700" Width="300" MouseDown="Window_MouseDown">
     <Grid>
         <StackPanel Margin="10">
             <Grid>
@@ -27,15 +27,15 @@
                 <TextBlock Text="住所" Grid.Row="2" Grid.Column="0"/>
                 <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
                 <TextBlock Text="画像" Grid.Row="3" Grid.Column="0"/>
-                <Button x:Name="ImageButton" Content="画像選択" Grid.Row="3" Grid.Column="1" Click="ImageButtonClear_Click"/>
+                <Button x:Name="ImageButton" Content="画像選択" Grid.Row="3" Grid.Column="1" Click="ImageButtonSelect_Click"/>
 
             </Grid>
 
             <Image x:Name="SelectImage" Height="150"   Margin="10"/>
-            <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click"/>
+            <Button Content="登録" x:Name="SaveButton" Click="SaveButton_Click"/>
             <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButton_Click"/>
             <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click"/>
-            <Button Content="画像をクリア" x:Name="ImageButtonClear"  Click="ImageButtonClear_Click_1"/>
+            <Button Content="画像をクリア" x:Name="ImageButtonClear"  Click="ImageButtonClear_Click"/>
             <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged"/>
 
             <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300" SelectionChanged="CustomerListView_SelectionChanged">
