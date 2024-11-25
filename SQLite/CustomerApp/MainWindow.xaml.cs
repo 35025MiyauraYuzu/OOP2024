@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 
 namespace CustomerApp {
     /// <summary>
@@ -23,7 +27,9 @@ namespace CustomerApp {
     /// </summary>
     public partial class MainWindow : Window {
         List<Customer> _customers;
-        string _image = "";
+        string _image = null;  //画像の記憶
+        byte[] binaryData;
+
 
         public MainWindow() {
             InitializeComponent();
@@ -33,11 +39,17 @@ namespace CustomerApp {
 
         //セーブ
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (SelectImage.Source !=null) {
+                Bitmap bmp = new Bitmap($"{SelectImage.Source}");
+                MemoryStream ms = new MemoryStream();
+                bmp.Save(ms, ImageFormat.Jpeg);
+                binaryData = ms.ToArray();
+            }
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                Image = _image,
+                Picture = binaryData,
 
             };
             if (customer.Name == "") {
@@ -64,10 +76,9 @@ namespace CustomerApp {
             NameTextBox.Clear();
             PhoneTextBox.Clear();
             AddressTextBox.Clear();
-            _image = "";
+            _image = null;
             SelectImage.Source = null;
             CustomerListView.SelectedItem = null;
-
         }
 
         //アップデート
@@ -78,11 +89,16 @@ namespace CustomerApp {
                 MessageBox.Show("変更する行を選択してください");
                 return;
             }
+            Bitmap bmp = new Bitmap($"{SelectImage.Source}");
+            MemoryStream ms = new MemoryStream();
+            bmp.Save(ms, ImageFormat.Jpeg);
+            binaryData = ms.ToArray();
 
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
-            item.Image = SelectImage.Source.ToString();
+            item.Picture = binaryData;
+        
 
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
@@ -97,7 +113,6 @@ namespace CustomerApp {
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 _customers = connection.Table<Customer>().ToList();
-
                 CustomerListView.ItemsSource = _customers;
             }
         }
@@ -118,7 +133,6 @@ namespace CustomerApp {
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 connection.Delete(item);
-
                 ReadDatabase();
                 Clear();
             }
@@ -130,36 +144,28 @@ namespace CustomerApp {
             if (item == null) {
                 return;
             }
+            Bitmap bmp = NewMethod(item);
             NameTextBox.Text = item.Name;
             PhoneTextBox.Text = item.Phone;
             AddressTextBox.Text = item.Address;
-            //if (_customers[CustomerListView.SelectedIndex] == null) {
-            //    return;
-            //}
-            //NameTextBox.Text = _customers[CustomerListView.SelectedIndex].Name;
-            //PhoneTextBox.Text = _customers[CustomerListView.SelectedIndex].Phone;
-            //AddressTextBox.Text = _customers[CustomerListView.SelectedIndex].Address;
-            //SelectImage.Source = [CustomerListView.SelectedIndex].Image;
-            // SelectImage.Source = new BitmapImage(new Uri(_customers[CustomerListView.SelectedIndex].Image));
+            SelectImage.Source = bmp;
 
+        }
 
-
-            if (/*_customers[CustomerListView.SelectedIndex].Image != null*/
-                item.Image != "") {
-                //  SelectImage.Source = new BitmapImage(new Uri(_customers[CustomerListView.SelectedIndex].Image));
-                SelectImage.Source = new BitmapImage(new Uri(item.Image));
-            }
-            return;
+        private static Bitmap NewMethod(Customer item) {
+            MemoryStream ms = new MemoryStream(item.Picture);
+            Bitmap bmp = new Bitmap(ms);
+            return bmp;
         }
 
         //保存する画像を選択
         private void ImageButtonSelect_Click(object sender, RoutedEventArgs e) {
 
-            var di = new OpenFileDialog();
-            if (di.ShowDialog() == true) {
-                _image = di.FileName;
+            var FilePath = new OpenFileDialog();
+            if (FilePath.ShowDialog() == true) {
+                _image = FilePath.FileName;
             }
-            if (di.FileName != null) {
+            if (FilePath.FileName != null && _image != "") {
                 SelectImage.Source = new BitmapImage(new Uri(_image));
             }
         }
@@ -172,5 +178,9 @@ namespace CustomerApp {
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
             Clear();
         }
+
+        
+
+        
     }
 }
