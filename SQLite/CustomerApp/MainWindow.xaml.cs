@@ -27,8 +27,9 @@ namespace CustomerApp {
     /// </summary>
     public partial class MainWindow : Window {
         List<Customer> _customers;
-        string _image = null;  //画像の記憶
-        byte[] binaryData;
+        private byte[] _Picture;
+        private string _selectedImagePath;
+
 
 
         public MainWindow() {
@@ -37,28 +38,24 @@ namespace CustomerApp {
             Clear();
         }
 
+
         //セーブ
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            if (SelectImage.Source !=null) {
-                Bitmap bmp = new Bitmap($"{SelectImage.Source}");
-                MemoryStream ms = new MemoryStream();
-                bmp.Save(ms, ImageFormat.Jpeg);
-                binaryData = ms.ToArray();
-            }
-            var customer = new Customer() {
-                Name = NameTextBox.Text,
-                Phone = PhoneTextBox.Text,
-                Address = AddressTextBox.Text,
-                Picture = binaryData,
-
-            };
-            if (customer.Name == "") {
+            if (NameTextBox.Name == "") {
                 MessageBox.Show("名前が入力されていません。",
                     "エラー",
                     MessageBoxButton.OK
                   );
                 return;
             }
+
+            var customer = new Customer() {
+                Name = NameTextBox.Text,
+                Phone = PhoneTextBox.Text,
+                Address = AddressTextBox.Text,
+                Picture = _Picture,
+            };
+
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
@@ -66,19 +63,19 @@ namespace CustomerApp {
             }
 
             Clear();
+            _Picture = null;
 
             ReadDatabase();//ListView表示
-
         }
+
+
 
         //クリア
         private void Clear() {
             NameTextBox.Clear();
             PhoneTextBox.Clear();
             AddressTextBox.Clear();
-            _image = null;
-            SelectImage.Source = null;
-            CustomerListView.SelectedItem = null;
+            SearchTextBox.Clear();
         }
 
         //アップデート
@@ -89,16 +86,14 @@ namespace CustomerApp {
                 MessageBox.Show("変更する行を選択してください");
                 return;
             }
-            Bitmap bmp = new Bitmap($"{SelectImage.Source}");
-            MemoryStream ms = new MemoryStream();
-            bmp.Save(ms, ImageFormat.Jpeg);
-            binaryData = ms.ToArray();
 
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
-            item.Picture = binaryData;
-        
+
+            if (_Picture != null) {
+                item.Picture = _Picture;
+            }
 
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
@@ -140,17 +135,20 @@ namespace CustomerApp {
 
         //ビューの選択
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var item = CustomerListView.SelectedItem as Customer;
-            if (item == null) {
-                return;
-            }
-            Bitmap bmp = NewMethod(item);
-            NameTextBox.Text = item.Name;
-            PhoneTextBox.Text = item.Phone;
-            AddressTextBox.Text = item.Address;
-            SelectImage.Source = bmp;
+            var item = (Customer)CustomerListView.SelectedItem;
+            if (SelectImage != null) {
+                NameTextBox.Text = item.Name;
+                PhoneTextBox.Text = item.Phone;
+                AddressTextBox.Text = item.Address;
+                SelectImage.Source = item.Image;
 
+            } else {
+                SelectImage.Source = null;
+            }
         }
+
+
+
 
         private static Bitmap NewMethod(Customer item) {
             MemoryStream ms = new MemoryStream(item.Picture);
@@ -160,27 +158,30 @@ namespace CustomerApp {
 
         //保存する画像を選択
         private void ImageButtonSelect_Click(object sender, RoutedEventArgs e) {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog {
+                Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png"
+            };
 
-            var FilePath = new OpenFileDialog();
-            if (FilePath.ShowDialog() == true) {
-                _image = FilePath.FileName;
-            }
-            if (FilePath.FileName != null && _image != "") {
-                SelectImage.Source = new BitmapImage(new Uri(_image));
+            if (openFileDialog.ShowDialog() == true) {
+                _Picture = File.ReadAllBytes(openFileDialog.FileName);
+                SelectImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
         }
 
         private void ImageButtonClear_Click(object sender, RoutedEventArgs e) {
             SelectImage.Source = null;
-
+            _Picture = null;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
             Clear();
         }
 
-        
 
-        
+
+        private byte[] ConvertImageToByteArray(string imagePath) {
+            return File.ReadAllBytes(imagePath);
+        }
+
     }
 }

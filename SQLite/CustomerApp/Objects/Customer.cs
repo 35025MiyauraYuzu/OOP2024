@@ -35,9 +35,23 @@ namespace CustomerApp.Objects {
         /// </summary>
         public byte[] Picture { get; set; }
 
+        public BitmapImage Image {
+            get {
+                if (Picture == null || Picture.Length == 0)
+                    return null;
+                using (var stream = new MemoryStream(Picture)) {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = stream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    return bitmap;
+                }
+            }
+        }
 
         public override string ToString() {
-            return $"{Id}:{Name}:{Phone}:{Address}:{Picture}";
+            return $"{Id}:{Name}:{Phone}:{Address}";
         }
     }
 }
