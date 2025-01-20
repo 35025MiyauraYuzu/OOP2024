@@ -93,7 +93,10 @@ namespace CustomerApp {
 
             if (_Picture != null) {
                 item.Picture = _Picture;
+            } else {
+                item.Picture = null;
             }
+
 
             using (var connection = new SQLiteConnection(App.databassPass)) {
                 connection.CreateTable<Customer>();
@@ -136,7 +139,7 @@ namespace CustomerApp {
         //ビューの選択
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var item = (Customer)CustomerListView.SelectedItem;
-            if (SelectImage != null) {
+            if (item != null) {
                 NameTextBox.Text = item.Name;
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
@@ -171,6 +174,7 @@ namespace CustomerApp {
         private void ImageButtonClear_Click(object sender, RoutedEventArgs e) {
             SelectImage.Source = null;
             _Picture = null;
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
